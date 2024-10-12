@@ -13,7 +13,7 @@ cmd({
         botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, 
         participants, groupAdmins, isBotAdmins, isAdmins, reply
     }) => {
-        const { data } = await axios.get(`https://temp.giftedapis.us.kg/api/download/ytdl?url={q}?feature=shared&apikey=gifted`);
+        const { data } = await axios.get(`https://temp.giftedapis.us.kg/api/download/ytdl?url=${q}?feature=shared&apikey=gifted`);
         return reply(`*Fact:* ${data.title}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`);
     }
 );
