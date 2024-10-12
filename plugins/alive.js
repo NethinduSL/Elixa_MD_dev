@@ -31,7 +31,11 @@ ${config.ALIVE_MSG}
         return await conn.sendMessage(from, {
             image: { url: config.ALIVE_IMG },
             caption: Alive
-        }, { quoted: mek });
+        }, 
+        { 
+            quoted: mek, // Add this for quoted reply
+            react: { text: '❤️', key: mek.key } // React with a heart
+        });
     } catch (e) {
         console.log(e);
         reply(`${e}`);
