@@ -27,15 +27,18 @@ ${config.ALIVE_MSG}
 ╰───────────────────
 
 > 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮 𝗠𝗗`;
-        
-        return await conn.sendMessage(from, {
+
+        // Send the message
+        const sentMsg = await conn.sendMessage(from, {
             image: { url: config.ALIVE_IMG },
             caption: Alive
-        }, 
-        { 
-            quoted: mek, // Add this for quoted reply
-            react: { text: '❤️', key: mek.key } // React with a heart
+        }, { quoted: mek });
+
+        // Apply the reaction to the sent message
+        await conn.sendMessage(from, {
+            react: { text: '❤️', key: sentMsg.key } // React to the message just sent
         });
+
     } catch (e) {
         console.log(e);
         reply(`${e}`);
