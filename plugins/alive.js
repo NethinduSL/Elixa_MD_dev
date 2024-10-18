@@ -1,21 +1,17 @@
 const config = require('../config');
 const { cmd, commands } = require('../command');
 const { runtime } = require('../lib/functions');
-const os = require('os'); // Corrected require statement
+const os = require('os');
+const { generateWAMessageFromContent, proto } = require('@whiskeysockets/baileys'); // Import necessary functions
 
 cmd({
     pattern: "alive",
     desc: "Check if the bot is online.",
     category: "main",
-    react : "🖥️",
     filename: __filename
-},
-async (conn, mek, m, {
-    from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, 
-    botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, 
-    participants, groupAdmins, isBotAdmins, isAdmins, reply
-}) => {
+}, async (conn, mek, m, { from, reply }) => {
     try {
+        // Define uptime message
         const uptimeMessage = `
 ${config.ALIVE_MSG}
 ╭
@@ -28,84 +24,34 @@ ${config.ALIVE_MSG}
 
 > 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮 𝗠𝗗`;
 
-        // Send the message
-
-
-const buttons = [
-      {
-        "name": "quick_reply",
-        "buttonParamsJson": JSON.stringify({
-          display_text: "MENU",
-          id: `${prefix}menu`
-        })
-      },
-      {
-        "name": "quick_reply",
-        "buttonParamsJson": JSON.stringify({
-          display_text: "PING",
-          id: `${prefix}ping`
-        })
-      }
-    ];
-
-    const msg = generateWAMessageFromContent(m.from, {
-      viewOnceMessage: {
-        message: {
-          messageContextInfo: {
-            deviceListMetadata: {},
-            deviceListMetadataVersion: 2
-          },
-          interactiveMessage: proto.Message.InteractiveMessage.create({
-            body: proto.Message.InteractiveMessage.Body.create({
-              text: uptimeMessage
-            }),
-            footer: proto.Message.InteractiveMessage.Footer.create({
-              text: "© ᴘᴏᴡᴇʀᴅ ʙʏ ᴇᴛʜɪx-ᴍᴅ"
-            }),
-            header: proto.Message.InteractiveMessage.Header.create({
-              ...(await prepareWAMessageMedia({ image: buffer }, { upload: Matrix.waUploadToServer })),
-              title: ``,
-              gifPlayback: false,
-              subtitle: "",
-              hasMediaAttachment: false
-            }),
-            nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-              buttons
-            }),
-            contextInfo: {
-              quotedMessage: m.message,
-              forwardingScore: 999,
-              isForwarded: true,
-              forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363249960769123@newsletter',
-                newsletterName: "Ethix-MD",
-                serverMessageId: 143
-              }
+        // Define buttons
+        const buttons = [
+            {
+                buttonId: `${config.prefix}menu`,
+                buttonText: { displayText: "MENU" },
+                type: 1
+            },
+            {
+                buttonId: `${config.prefix}ping`,
+                buttonText: { displayText: "PING" },
+                type: 1
             }
-          }),
-        },
-      },
-    }, {});
+        ];
 
-    await sendMessage(msg.key.remoteJid, msg.message, {
-      messageId: msg.key.id
-    });
-  }
-};
+        // Generate message with buttons (no image)
+        const msg = generateWAMessageFromContent(from, proto.Message.fromObject({
+            buttonsMessage: {
+                contentText: uptimeMessage,
+                footerText: "© ᴘᴏᴡᴇʀᴅ ʙʏ ᴇᴛʜɪx-ᴍᴅ",
+                buttons: buttons,
+                headerType: 1 // 1 = Text header
+            }
+        }), {});
 
-
-
-
-
-
-
-
-
-
-        
-
+        // Send the message
+        await conn.sendMessage(from, msg.message, { messageId: msg.key.id });
     } catch (e) {
-        console.log(e);
+        console.error(e);
         reply(`${e}`);
     }
 });
