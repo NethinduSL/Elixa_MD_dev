@@ -4,7 +4,7 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env'
 module.exports = {
 
 //╭──────────────────────Main──────────────────────╮//   
-    SESSION_ID: process.env.SESSION_ID || "8BBFQbBS#-fZUOkYFMFzMo5dM9JCWZJNaaQIjrHspS_KMnNOSVk8",
+    SESSION_ID: process.env.SESSION_ID || "BB4RXLxJ#KBWbuk1Ex9p8JdVRtgGc2D-K_VUSQB2rNHcdtL-z3cY",
     ALIVE_IMG: process.env.ALIVE_IMG || "https://telegra.ph/file/261c717e5e4f165712ec4.png",
     ALIVE_MSG: process.env.ALIVE_MSG || "Elixs Is Alive Nox👍🇱🇰✅ ",
     AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
