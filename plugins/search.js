@@ -74,3 +74,61 @@ cmd({
         reply(`*An error occurred while fetching the movie info* ❗`);
     }
 });
+
+
+
+cmd({
+    pattern: "weather",
+    category: "search",
+    desc: "Fetches and sends weather information for the specified location.",
+    use: '<city_name>',
+    react: "☀️",
+    filename: __filename,
+}, async (conn, mek, m, {
+    from, quoted, args, reply
+}) => {
+    try {
+        // Join the arguments to form the city name
+        const cityName = args.join(" ").trim();
+
+        // Check if a city name is provided
+        if (!cityName) {
+            return reply(`*Please provide a city name* ❗`);
+        }
+
+        // Fetch weather data from OpenWeather API
+        const apiKey = '060a6bcfa19809c2cd4d97a212b19273'; // Replace with your API key
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
+        const { data } = await axios.get(weatherUrl);
+
+        // Extract relevant weather data
+        const location = data.name;
+        const country = data.sys.country;
+        const temperature = data.main.temp;
+        const feelsLike = data.main.feels_like;
+        const weatherDescription = data.weather[0].description;
+        const humidity = data.main.humidity;
+        const windSpeed = data.wind.speed;
+
+        // Prepare the weather message
+        const weatherMessage = `🌍 *Weather Report for ${location}, ${country}* 🌍\n\n` +
+            `🌡️ *Temperature:* ${temperature}°C (Feels like: ${feelsLike}°C)\n` +
+            `☁️ *Condition:* ${weatherDescription}\n` +
+            `💧 *Humidity:* ${humidity}%\n` +
+            `💨 *Wind Speed:* ${windSpeed} m/s\n\n` +
+            `_Powered by OpenWeather API_`;
+
+        // Send the weather message
+        await conn.sendMessage(from, { text: weatherMessage }, { quoted });
+
+    } catch (error) {
+        console.error("Error fetching weather data:", error);
+
+        // Handle specific errors
+        if (error.response && error.response.status === 404) {
+            return reply(`*City not found.* Please check the name and try again.`);
+        }
+        reply(`*An error occurred while fetching the weather data.* Please try again later.`);
+    }
+});
+
