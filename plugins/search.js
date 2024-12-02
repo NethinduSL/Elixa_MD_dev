@@ -86,8 +86,8 @@ cmd({
     filename: __filename,
 },
     async (conn, mek, m, {
-        from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, 
-        botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, 
+        from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber,
+        botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName,
         participants, groupAdmins, isBotAdmins, isAdmins, reply
     }) => {
         try {
@@ -106,13 +106,7 @@ cmd({
             const apiKey = '060a6bcfa19809c2cd4d97a212b19273'; // Replace with your API key
             const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${q}&units=metric&appid=${apiKey}`;
             
-            const response = await axios.get(weatherUrl);
-
-            if (response.status !== 200) {
-                return reply(`*Error fetching data:* ${response.statusText} (Code: ${response.status})`);
-            }
-
-            const data = response.data;
+            const { data } = await axios.get(weatherUrl, { timeout: 10000 }); // 10-second timeout
 
             // Extract relevant weather data
             const location = data.name || q;
@@ -145,9 +139,9 @@ cmd({
             await conn.sendMessage(from, { text: weatherMessage }, { quoted });
 
         } catch (error) {
-            console.error("Error fetching weather data:", error.message);
+            console.error("Error fetching weather data:", error.response ? error.response.data : error.message);
 
-            // Handle API errors specifically
+            // Specific error handling
             if (error.response) {
                 if (error.response.status === 404) {
                     return reply(`*City not found.* Please check the name and try again.`);
@@ -155,8 +149,12 @@ cmd({
                 return reply(`*Error fetching data:* ${error.response.statusText} (Code: ${error.response.status})`);
             }
 
-            // Handle general errors
-            reply(`*An error occurred while fetching the weather data.* Please try again later.`);
+            // Timeout or other errors
+            if (error.code === 'ECONNABORTED') {
+                return reply(`*Request timed out.* The server took too long to respond. Please try again.`);
+            }
+
+            reply(`*An unexpected error occurred while fetching the weather data.* Please try again later.`);
         }
     }
 );
