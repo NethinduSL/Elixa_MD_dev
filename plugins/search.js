@@ -76,4 +76,72 @@ cmd({
 });
 
 
+const axios = require('axios');
+const { cmd } = require('../command');
+
+cmd({
+    pattern: "weather",
+    category: "search",
+    desc: "Sends weather information for the requested city.",
+    use: '<city_name>',
+    react: "🌤️",
+    filename: __filename,
+},
+    async (conn, mek, m, {
+    from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber,
+    botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName,
+    participants, groupAdmins, isBotAdmins, isAdmins, reply
+}) => {
+
+    try {
+        // Ensure q captures the city name
+        q = args.join(" ").trim();
+
+        // Check if city name is provided
+        if (!q) {
+            return reply(`*Please provide a city name* ❗`);
+        }
+
+        // Fetch weather data from OpenWeatherMap API
+        let response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${q}&units=metric&appid=060a6bcfa19809c2cd4d97a212b19273`);
+
+        // Extract data
+        const data = response.data;
+
+        // Format weather information
+        let weatherInfo = "╭───────────────────╮\n│          🌤️ 𝗪𝗲𝗮𝘁𝗵𝗲𝗿 𝗜𝗻𝗳𝗼 🌤️          │\n╰───────────────────╯\n";
+        weatherInfo += `📍 City       : ${data.name}, ${data.sys.country}\n\n`;
+        weatherInfo += `🌡️ Temperature : ${data.main.temp}°C (Feels like: ${data.main.feels_like}°C)\n\n`;
+        weatherInfo += `🔼 Max Temp   : ${data.main.temp_max}°C\n\n`;
+        weatherInfo += `🔽 Min Temp   : ${data.main.temp_min}°C\n\n`;
+        weatherInfo += `💨 Wind Speed : ${data.wind.speed} m/s\n\n`;
+        weatherInfo += `🌫️ Humidity   : ${data.main.humidity}%\n\n`;
+        weatherInfo += `🌥️ Conditions : ${data.weather[0].description}\n\n`;
+        weatherInfo += `📊 Pressure   : ${data.main.pressure} hPa\n\n`;
+        weatherInfo += `🌅 Sunrise    : ${new Date(data.sys.sunrise * 1000).toLocaleTimeString()}\n\n`;
+        weatherInfo += `🌇 Sunset     : ${new Date(data.sys.sunset * 1000).toLocaleTimeString()}`;
+
+        let footer = "\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺";
+
+        // Check if weather icon exists
+        const iconUrl = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+        // Send weather info with or without icon
+        await conn.sendMessage(m.chat, {
+            image: { url: iconUrl },
+            caption: weatherInfo + footer,
+        }, { quoted: m });
+
+    } catch (error) {
+        console.error(error);
+
+        if (error.response && error.response.data && error.response.data.message) {
+            reply(`*Error:* ${error.response.data.message}`);
+        } else {
+            reply(`*An error occurred while fetching the weather info* ❗`);
+        }
+    }
+});
+
+
 
