@@ -74,7 +74,7 @@ async function connectToWA() {
              console.log(' 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺');   
 
             let up = `Elixa MDconnected successfully ✅\n\nPREFIX: ${prefix} \n ❤️🇱🇰Form Nethindu Thaminda \n > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`;
-            conn.sendMessage(ownerNumber[0] + "@s.whatsapp.net", { image: { url: `https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/elixa/connect.png` }, caption: up });
+            conn.sendMessage(ownerNumber[0] + "@s.whatsapp.net", { image: { url: `https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/connect.png` }, caption: up });
         }
     });
 
