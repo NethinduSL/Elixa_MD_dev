@@ -11,7 +11,7 @@ cmd({
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        let data = await fetchJson(`https://api.giftedtech.my.id/api/ai/gpt4?apikey=gifted&q=${q}`);
+        let data = await fetchJson(`https://www.dark-yasiya-api.site/ai/chatgpt?q=hi${q}`);
         return reply(`${data.message}`);
     } catch (e) {
         console.log(e);
