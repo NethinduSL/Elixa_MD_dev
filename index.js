@@ -72,8 +72,8 @@ async function connectToWA() {
             console.log('Bot connected to WhatsApp ✅');
              console.log(' 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺');   
 
-            let up = `Elixa MDconnected successfully ✅\n\nPREFIX: ${prefix} \n > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`;
-            conn.sendMessage(ownerNumber[0] + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/6fd1c829a29ce3a8c6679.png` }, caption: up });
+            let up = `Elixa MDconnected successfully ✅\n\nPREFIX: ${prefix} \n ❤️🇱🇰Form Nethindu Thaminda \n > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`;
+            conn.sendMessage(ownerNumber[0] + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/3ccba1e72de2ea4edee0e.png` }, caption: up });
         }
     });
 
