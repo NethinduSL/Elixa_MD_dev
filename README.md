@@ -1,12 +1,5 @@
-# Elix_MD
+# Elixa_MD
 https://telegra.ph/Elixa-08-23
-
-![Elixa MD Logo](https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Copy%20of%20Elixa-MD%20(Logo)%20(2).png)
-
-
-markdown
-# Elixa MD - WhatsApp Bot 🤖
-
 Elixa MD is a powerful, customizable, and easy-to-use WhatsApp bot built using **Node.js** and the [Baileys](https://github.com/adiwajshing/Baileys) library. This bot is designed to provide automation and interactive features on WhatsApp with minimal setup.
 
 ---
@@ -19,6 +12,13 @@ Elixa MD is a powerful, customizable, and easy-to-use WhatsApp bot built using *
 - 🔒 **Secure**: Ensures end-to-end encryption for WhatsApp interactions.
 
 ---
+
+![Elixa MD Logo](https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Copy%20of%20Elixa-MD%20(Logo)%20(2).png)
+
+
+markdown
+# Elixa MD - WhatsApp Bot 🤖
+
 
 ## 🚀 Getting Started
 
