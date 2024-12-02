@@ -134,7 +134,7 @@ cmd({
             if (error.response && error.response.status === 404) {
                 return reply(`*City not found.* Please check the name and try again.`);
             }
-            reply(`*An error occurred while fetching the weather data.* Please try again later.`);
+
         }
     }
 );
