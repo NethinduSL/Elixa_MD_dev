@@ -84,51 +84,57 @@ cmd({
     use: '<city_name>',
     react: "☀️",
     filename: __filename,
-}, async (conn, mek, m, {
-    from, quoted, args, reply
-}) => {
-    try {
-        // Join the arguments to form the city name
-        const cityName = args.join(" ").trim();
+},
+    async (conn, mek, m, {
+        from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, 
+        botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, 
+        participants, groupAdmins, isBotAdmins, isAdmins, reply
+    }) => {
+        try {
+            // Ensure `q` captures the city name
+            q = args.join(" ").trim();
 
-        // Check if a city name is provided
-        if (!cityName) {
-            return reply(`*Please provide a city name* ❗`);
+            // Check if city name is provided
+            if (!q) {
+                return reply(`*Please provide a city name* ❗`);
+            }
+
+            // Fetch weather data from OpenWeather API
+            const apiKey = '060a6bcfa19809c2cd4d97a212b19273'; // Replace with your API key if necessary
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${q}&units=metric&appid=${apiKey}`;
+            const { data } = await axios.get(weatherUrl);
+
+            // Extract relevant weather data
+            const location = data.name || q;
+            const country = data.sys?.country || "Unknown";
+            const temperature = data.main?.temp || "N/A";
+            const feelsLike = data.main?.feels_like || "N/A";
+            const weatherDescription = data.weather?.[0]?.description || "N/A";
+            const humidity = data.main?.humidity || "N/A";
+            const windSpeed = data.wind?.speed || "N/A";
+
+            // Prepare the weather message
+            const weatherMessage = `╭───────────────────╮\n` +
+                `│              𝗪𝗲𝗮𝘁𝗵𝗲𝗿 𝗥𝗲𝗽𝗼𝗿𝘁                │\n` +
+                `╰───────────────────╯\n\n` +
+                `📍 *Location:* ${location}, ${country}\n` +
+                `🌡️ *Temperature:* ${temperature}°C (Feels like: ${feelsLike}°C)\n` +
+                `☁️ *Condition:* ${weatherDescription}\n` +
+                `💧 *Humidity:* ${humidity}%\n` +
+                `💨 *Wind Speed:* ${windSpeed} m/s\n\n` +
+                `_Powered by OpenWeather API_`;
+
+            // Send the weather message
+            await conn.sendMessage(from, { text: weatherMessage }, { quoted });
+
+        } catch (error) {
+            console.error("Error fetching weather data:", error.response ? error.response.data : error.message);
+
+            // Handle specific errors
+            if (error.response && error.response.status === 404) {
+                return reply(`*City not found.* Please check the name and try again.`);
+            }
+            reply(`*An error occurred while fetching the weather data.* Please try again later.`);
         }
-
-        // Fetch weather data from OpenWeather API
-        const apiKey = ''; // Replace with your API key
-        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=060a6bcfa19809c2cd4d97a212b19273`;
-        const { data } = await axios.get(weatherUrl);
-
-        // Extract relevant weather data
-        const location = data.name;
-        const country = data.sys.country;
-        const temperature = data.main.temp;
-        const feelsLike = data.main.feels_like;
-        const weatherDescription = data.weather[0].description;
-        const humidity = data.main.humidity;
-        const windSpeed = data.wind.speed;
-
-        // Prepare the weather message
-        const weatherMessage = `🌍 *Weather Report for ${location}, ${country}* 🌍\n\n` +
-            `🌡️ *Temperature:* ${temperature}°C (Feels like: ${feelsLike}°C)\n` +
-            `☁️ *Condition:* ${weatherDescription}\n` +
-            `💧 *Humidity:* ${humidity}%\n` +
-            `💨 *Wind Speed:* ${windSpeed} m/s\n\n` +
-            `_Powered by OpenWeather API_`;
-
-        // Send the weather message
-        await conn.sendMessage(from, { text: weatherMessage }, { quoted });
-
-    } catch (error) {
-        console.error("Error fetching weather data:", error);
-
-        // Handle specific errors
-        if (error.response && error.response.status === 404) {
-            return reply(`*City not found.* Please check the name and try again.`);
-        }
-        reply(`*An error occurred while fetching the weather data.* Please try again later.`);
     }
-});
-
+);
