@@ -112,6 +112,10 @@ cmd({
             const weatherDescription = data.weather?.[0]?.description || "N/A";
             const humidity = data.main?.humidity || "N/A";
             const windSpeed = data.wind?.speed || "N/A";
+            const windDirection = data.wind?.deg || "N/A";
+            const cloudiness = data.clouds?.all || "N/A";
+            const sunrise = new Date(data.sys?.sunrise * 1000).toLocaleTimeString();
+            const sunset = new Date(data.sys?.sunset * 1000).toLocaleTimeString();
 
             // Prepare the weather message
             const weatherMessage = `╭───────────────────╮\n` +
@@ -121,8 +125,12 @@ cmd({
                 `🌡️ *Temperature:* ${temperature}°C (Feels like: ${feelsLike}°C)\n` +
                 `☁️ *Condition:* ${weatherDescription}\n` +
                 `💧 *Humidity:* ${humidity}%\n` +
-                `💨 *Wind Speed:* ${windSpeed} m/s\n\n` +
-                `_Powered by OpenWeather API_`;
+                `💨 *Wind Speed:* ${windSpeed} m/s (Direction: ${windDirection}°)\n` +
+                `☁️ *Cloudiness:* ${cloudiness}%\n` +
+                `🌅 *Sunrise:* ${sunrise}\n` +
+                `🌇 *Sunset:* ${sunset}\n\n` +
+                `_By Bit x_\n\n` +
+                `> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`;
 
             // Send the weather message
             await conn.sendMessage(from, { text: weatherMessage }, { quoted });
@@ -134,7 +142,7 @@ cmd({
             if (error.response && error.response.status === 404) {
                 return reply(`*City not found.* Please check the name and try again.`);
             }
-
+            reply(`*An error occurred while fetching the weather data.* Please try again later.`);
         }
     }
 );
