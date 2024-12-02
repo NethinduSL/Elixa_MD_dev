@@ -97,8 +97,8 @@ cmd({
         }
 
         // Fetch weather data from OpenWeather API
-        const apiKey = '060a6bcfa19809c2cd4d97a212b19273'; // Replace with your API key
-        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
+        const apiKey = ''; // Replace with your API key
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=060a6bcfa19809c2cd4d97a212b19273`;
         const { data } = await axios.get(weatherUrl);
 
         // Extract relevant weather data
