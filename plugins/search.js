@@ -99,10 +99,20 @@ cmd({
                 return reply(`*Please provide a city name* ❗`);
             }
 
+            // Notify the user that data is being fetched
+            reply(`Fetching weather data for *${q}*... Please wait a moment!`);
+
             // Fetch weather data from OpenWeather API
-            const apiKey = '060a6bcfa19809c2cd4d97a212b19273'; // Replace with your API key if necessary
+            const apiKey = '060a6bcfa19809c2cd4d97a212b19273'; // Replace with your API key
             const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${q}&units=metric&appid=${apiKey}`;
-            const { data } = await axios.get(weatherUrl);
+            
+            const response = await axios.get(weatherUrl);
+
+            if (response.status !== 200) {
+                return reply(`*Error fetching data:* ${response.statusText} (Code: ${response.status})`);
+            }
+
+            const data = response.data;
 
             // Extract relevant weather data
             const location = data.name || q;
@@ -129,19 +139,23 @@ cmd({
                 `☁️ *Cloudiness:* ${cloudiness}%\n` +
                 `🌅 *Sunrise:* ${sunrise}\n` +
                 `🌇 *Sunset:* ${sunset}\n\n` +
-                `_By Bit x_\n\n` +
                 `> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`;
 
             // Send the weather message
             await conn.sendMessage(from, { text: weatherMessage }, { quoted });
 
         } catch (error) {
-            console.error("Error fetching weather data:", error.response ? error.response.data : error.message);
+            console.error("Error fetching weather data:", error.message);
 
-            // Handle specific errors
-            if (error.response && error.response.status === 404) {
-                return reply(`*City not found.* Please check the name and try again.`);
+            // Handle API errors specifically
+            if (error.response) {
+                if (error.response.status === 404) {
+                    return reply(`*City not found.* Please check the name and try again.`);
+                }
+                return reply(`*Error fetching data:* ${error.response.statusText} (Code: ${error.response.status})`);
             }
+
+            // Handle general errors
             reply(`*An error occurred while fetching the weather data.* Please try again later.`);
         }
     }
