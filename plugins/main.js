@@ -2,6 +2,7 @@ const config = require('../config');
 const { cmd, commands } = require('../command');
 const { runtime } = require('../lib/functions');
 const os = require('os');  // Fixed the typo 'requir' to 'require'
+const axios = require('axios');
 
 cmd({
     pattern: "system",
@@ -30,6 +31,9 @@ cmd({
 });
 
 
+//╭──────────────────────fact──────────────────────╮//
+
+
 cmd({
     pattern: "repo",
     desc: "About Elixa git",
@@ -37,38 +41,29 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
+        let elixs = await axios.get('https://api.github.com/repos/Eboxsl/Elixa_MD');
+        let elixa = "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺\n";
+        elixa += `👤 Owner: ${elixs.data.owner.login}\n\n`;
+        elixa += `📦 Repository Name: ${elixs.data.name}\n`;
+        elixa += `🔤 Full Name: ${elixs.data.full_name}\n`;
+        elixa += `✨ Description: ${elixs.data.description}\n`;
+        elixa += `💻 Language: ${elixs.data.language}\n`;
+        elixa += `🍴 Fork Count: ${elixs.data.forks_count}\n`;
+        elixa += `👀 Watchers Count: ${elixs.data.watchers_count}\n`;
+        elixa += `⭐ Star Count: ${elixs.data.stargazers_count}\n`;
+        elixa += `🛠️ Open Issues: ${elixs.data.open_issues_count}\n`;
+        elixa += `🌐 Visibility: ${elixs.data.visibility}\n`;
+        elixa += `📅 Created At: ${elixs.data.created_at}\n`;
+        elixa += `⏰ Updated At: ${elixs.data.updated_at}\n`;
+        elixa += `🚀 Pushed At: ${elixs.data.pushed_at}\n`;
+        elixa += `🔍 Owner Profile URL: ${elixs.data.owner.html_url}\n`;
+        elixa += `🖼️ Owner Avatar: ${elixs.data.owner.avatar_url}\n`;
+        elixa += `🔗 URL: ${elixs.data.html_url}\n`;
 
+        await conn.sendMessage(m.chat, { text: elixa }, { quoted: m });
 
-let elixs = await axios.get(`https://api.github.com/repos/Eboxsl/Elixa_MD`);
-
-
-let elixa = "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺\n";
-elixa += `👤 Owner: ${elixa.data.login}\n\n`;
-elixa += `📦 Repository Name: ${elixa.data.name}\n`;
-elixa += `🔤 Full Name: ${elixa.data.full_name}\n`;
-elixa += `✨ Description: ${elixa.data.description}\n`;
-elixa += `💻 Language: ${elixa.data.language}\n`;
-elixa += `🍴 Fork Count: ${elixa.data.forks_count}\n`;
-elixa += `👀 Watchers Count: ${elixa.data.watchers_count}\n`;
-elixa += `⭐ Star Count: ${elixa.data.stargazers_count}\n`;
-elixa += `🛠️ Open Issues: ${elixa.data.open_issues_count}\n`;
-elixa += `🌐 Visibility: ${elixa.data.visibility}\n`;
-elixa += `📅 Created At: ${elixa.data.created_at}\n`;
-elixa += `⏰ Updated At: ${elixa.data.updated_at}\n`;
-elixa += `🚀 Pushed At: ${elixa.data.pushed_at}\n`;
-elixa += `🔍 Owner Profile URL: ${elixa.data.owner.html_url}\n`;
-elixa += `🖼️ Owner Avatar: ${elixa.data.owner.avatar_url}\n`;
-elixa += `🔗 URL: ${elixa.data.html_url}\n`;
-
-
-
-
-let cap="\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺"
-
-await conn.sendMessage(m.chat, { text: elixa }, { quoted: m });
-        
     } catch (e) {
         console.log(e);
-        reply(`${e}`);
+        reply(`Error: ${e.message}`);
     }
 });
