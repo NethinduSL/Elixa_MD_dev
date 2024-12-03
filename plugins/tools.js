@@ -5,6 +5,7 @@ const { fetchJson, getBuffer } = require('../lib/functions');
 cmd({
     pattern: "qr",
     category: "converter",
+    react : "📎",
     filename: __filename,
     desc: "Sends QR code of text"
 },
