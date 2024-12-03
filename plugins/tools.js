@@ -19,7 +19,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(text)}`;
         const buffer = await getBuffer(qrCodeUrl);
 
-        await conn.sendMessage(from, { image: buffer, caption: `Here is your QR code for: ${text}` }, { quoted: mek });
+        await conn.sendMessage(from, { image: buffer, caption: `Here is your QR code for: ${text}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺` }, { quoted: mek });
     } catch (e) {
         console.error(e);
         mek.reply("An error occurred while generating the QR code. Please try again.");
