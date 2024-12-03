@@ -69,6 +69,9 @@ async (Void, citel) => {
 ⏳ *Time Remaining to End of Day:* ${timeRemainingEndOfDay}
 🗓️ *Days Remaining to End of Year:* ${daysToEndYear} days
 🕰️ *Time Zone:* ${timeZone}
+
+> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
+
 `;
 
     const pg = await Void.sendMessage(citel.chat, { text: responseMessage, edit: key });
