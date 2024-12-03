@@ -19,17 +19,17 @@ async (conn, mek, m, {
         const Alive = `
 *${config.ALIVE_MSG}*
 ╭
-*│✅𝗥𝘂𝗻𝘁𝗶𝗺𝗲: ${runtime(process.uptime())}*
-*│🖥️𝗥𝗮𝗺: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${Math.round(os.totalmem() / 1024 / 1024)} MB*
-*│📍𝗛𝗼𝘀𝘁: ${os.hostname()}*
-*│*
-*│👩‍💻𝗖𝗿𝗲𝗮𝘁𝗼𝗿: Nethindu Thaminda*
-*│🤝𝗢𝘄𝗻𝗲𝗿: ${config.OWNER}*
-*│*
-*│Type .menu for all command*
-*│*
-*╰───────────────────* 
-
+│✅𝗥𝘂𝗻𝘁𝗶𝗺𝗲: ${runtime(process.uptime())}
+│🖥️𝗥𝗮𝗺: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${Math.round(os.totalmem() / 1024 / 1024)} MB
+│📍𝗛𝗼𝘀𝘁: ${os.hostname()}
+│
+│👩‍💻𝗖𝗿𝗲𝗮𝘁𝗼𝗿: Nethindu Thaminda
+│🤝𝗢𝘄𝗻𝗲𝗿: ${config.OWNER}
+│
+│Type .menu for all command
+│
+╰───────────────────
+ꜰʀᴏᴍ 🇱🇰 ʙʏ ᴇʙᴏx❤️
 > 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮 𝗠𝗗`;
 
         const sentMsg = await conn.sendMessage(from, {
