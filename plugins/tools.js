@@ -11,7 +11,8 @@ cmd({
 },
 async (Void, citel, text) => {
     try {
-        if (!text) return citel.reply("Please provide text to generate the QR code.");
+        
+        if (!q) return citel.reply("Please provide text to generate the QR code.");
         let qrelixa = await getBuffer(`https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${q}`);
         
         await Void.sendMessage(citel.chat, {
