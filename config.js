@@ -5,7 +5,7 @@ module.exports = {
 
 //╭──────────────────────Main──────────────────────╮//   
     SESSION_ID: process.env.SESSION_ID || "wcxmzDSQ#g1pi2sPVMzxwzkGVZDF1R0RQJKPf-SO_5mVEO06tLFI",
-    ALIVE_IMG: process.env.ALIVE_IMG || "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png",
+    ALIVE_IMG: process.env.ALIVE_IMG || "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/Hi.png",
     ALIVE_MSG: process.env.ALIVE_MSG || "Elixs Is Alive Nox👍🇱🇰✅ ",
     AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
     OWNER: process.env.OWNER || "Your Name",
