@@ -11,17 +11,18 @@ cmd({
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        if (!q) return citel.reply("Please provide text to generate the QR code.");
+        if (!q) return mek.reply("Please provide text to generate the QR code.");
         
         // Generate QR code URL
         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(q)}`;
         
-        await Void.sendMessage(citel.chat, {
+        // Send the image message
+        await conn.sendMessage(mek.chat, {
             image: { url: qrUrl }, // Corrected image URL format
             caption: "> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺",
-        }, { quoted: citel });
+        }, { quoted: mek });
     } catch (e) {
         console.error(e);
-        citel.reply("An error occurred while generating the QR code. Please try again.");
+        mek.reply("An error occurred while generating the QR code. Please try again.");
     }
 });
