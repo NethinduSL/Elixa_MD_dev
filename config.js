@@ -4,7 +4,7 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env'
 module.exports = {
 
 //╭──────────────────────Main──────────────────────╮//   
-    SESSION_ID: process.env.SESSION_ID || "wcxmzDSQ#g1pi2sPVMzxwzkGVZDF1R0RQJKPf-SO_5mVEO06tLFI",
+    SESSION_ID: process.env.SESSION_ID || "4UQwHaba#jKgd08kzQN7U4peAJxbEseXtzJqPBCu_NdA7GylUkv4",
     ALIVE_IMG: process.env.ALIVE_IMG || "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/Hi.png",
     ALIVE_MSG: process.env.ALIVE_MSG || "Elixs Is Alive Nox👍🇱🇰✅ ",
     AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
