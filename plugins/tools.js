@@ -9,14 +9,15 @@ cmd({
     filename: __filename,
     desc: "Sends QR code of text"
 },
-async (Void, citel, text) => {
+async (Void, citel, q ) => {
     try {
-        
         if (!q) return citel.reply("Please provide text to generate the QR code.");
-        let qrelixa = await getBuffer(`https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${q}`);
+        
+        // Generate QR code URL
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(q)}`;
         
         await Void.sendMessage(citel.chat, {
-            image: qrelixa,
+            image: { url: qrUrl }, // Corrected image URL format
             caption: "> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺",
         }, { quoted: citel });
     } catch (e) {
