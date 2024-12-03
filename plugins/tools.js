@@ -4,7 +4,7 @@ const { fetchJson, getBuffer } = require('../lib/functions');
 
 
 const { runtime } = require('../lib/functions');  
-const moment = require('moment');
+const moment = require('moment-timezone');
 const os = require('os');
 
 
