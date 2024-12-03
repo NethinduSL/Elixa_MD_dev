@@ -9,7 +9,7 @@ cmd({
     filename: __filename,
     desc: "Sends QR code of text"
 },
-async (Void, citel, q ) => {
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
         if (!q) return citel.reply("Please provide text to generate the QR code.");
         
