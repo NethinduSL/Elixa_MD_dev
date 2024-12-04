@@ -146,11 +146,6 @@ weatherInfo += `\n`;
 });
 
 
-
-
-const axios = require('axios');
-const { cmd } = require('../command');
-
 cmd({
     pattern: "lyrics",
     category: "search",
