@@ -201,3 +201,57 @@ cmd({
     }
 });
 
+
+
+
+const axios = require('axios');
+const { cmd } = require('../command');
+
+cmd({
+    pattern: "google",
+    alias: ['search', 'gsearch'],
+    category: "search",
+    desc: "Sends info of given query from Google Search.",
+    use: '<text>',
+    react: "🔗",
+    filename: __filename
+},
+async (conn, mek, m, {
+    from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply
+}) => {
+    try {
+        if (!q) return reply("Please provide a query. Example: .google Who is Suhail Tech.");
+
+        const apiUrl = `https://api.giftedtech.my.id/api/search/google?apikey=gifted&query=${encodeURIComponent(q)}`;
+
+        const response = await axios.get(apiUrl);
+
+        if (!response.data.success) {
+            return reply("No search results found.");
+        }
+
+        const results = response.data.results;
+        if (!results || results.length === 0) {
+            return reply("No results found for your query.");
+        }
+
+        let msg = `❰Google Search Results for: *${q}* ❱❱\n\n`;
+
+        results.forEach(result => {
+            msg += `┃● *Title:* ${result.title}\n`;
+            msg += `┃●*Description:* ${result.description}\n`;
+            msg += `┃● *Link:* ${result.url}\n\n═══════════════════\n\n`;
+        });
+
+        const cap = `\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`;
+
+        conn.sendMessage(from, { text: msg + cap });
+
+        conn.react("🔗");
+
+    } catch (e) {
+        console.error(e);
+        reply(`Error: ${e.message || e}`);
+    }
+});
+
