@@ -17,18 +17,23 @@ async (conn, mek, m, {
 }) => {
     try {
         const Alive = `
-*${config.ALIVE_MSG}*
-╭
-│✅𝗥𝘂𝗻𝘁𝗶𝗺𝗲: ${runtime(process.uptime())}
-│🖥️𝗥𝗮𝗺: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${Math.round(os.totalmem() / 1024 / 1024)} MB
-│📍𝗛𝗼𝘀𝘁: ${os.hostname()}
-│
-│👩‍💻𝗖𝗿𝗲𝗮𝘁𝗼𝗿: Nethindu Thaminda
-│🤝𝗢𝘄𝗻𝗲𝗿: ${config.OWNER}
-│
-│𝗧𝘆𝗽𝗲 .𝗠𝗲𝗻𝘂 𝗳𝗼𝗿 𝗮𝗹𝗹 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀
-╰───────────────────
-ꜰʀᴏᴍ 🇱🇰 ʙʏ ᴇʙᴏx❤️
+${config.ALIVE_MSG}
+
+╭ ❰ 𝗜𝗠   𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗  ❱❱
+┃
+┃𝗛𝗜  ${pushname} 𝗜'𝗠 𝗔𝗹𝗶𝘃𝗲
+┃
+┃⦁✅𝗥𝘂𝗻𝘁𝗶𝗺𝗲: ${runtime(process.uptime())}
+┃⦁🖥️𝗥𝗮𝗺: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${Math.round(os.totalmem() / 1024 / 1024)} MB
+┃⦁📍𝗛𝗼𝘀𝘁: ${os.hostname()}
+┃
+┃⦁👩‍💻𝗖𝗿𝗲𝗮𝘁𝗼𝗿: Nethindu Thaminda
+┃⦁🤝𝗢𝘄𝗻𝗲𝗿: ${config.OWNER}
+┃
+┃⦁ᴛʏᴘᴇ .ᴍᴇɴᴜ ꜰᴏʀ ᴀʟʟ ᴄᴏᴍᴀɴᴅꜱ
+╰══════════════════
+*ꜰʀᴏᴍ 🇱🇰 ʙʏ ᴇʙᴏx❤️*
+
 𝗯𝘆 𝗕𝗜𝗧 𝘅 ᵀᴹ
 
 > 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮 𝗠𝗗`;
