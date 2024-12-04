@@ -24,40 +24,42 @@ cmd({
 
         for (let i = 0; i < commands.length; i++) {
             if (commands[i].pattern && !commands[i].dontAddCommandList) {
-                menu[commands[i].category] += `.${commands[i].pattern}\n│`;
+                menu[commands[i].category] += `.${commands[i].pattern}\n┃`;
             }
         }
 
         let Elixamenu = `
-╭𝗛𝗲𝗹𝗹𝗼 ${pushname} 𝗘ꟾ𝖎✘𝗮👋╮
-│𝗶𝗻 𝗚𝗿𝗼𝘂𝗽 ${groupName}👥
-│𝗬𝗼𝘂𝗿 𝗡𝘂𝗺𝗯𝗲𝗿 ${senderNumber}🙂
+╭ ❰  𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗘𝗡𝗨  ❱❱
+┃    
+╭𝗛𝗲𝗹𝗹𝗼 ${pushname} 𝗘ꟾ𝖎✘𝗮👋
+┃⦁𝗶𝗻 𝗚𝗿𝗼𝘂𝗽 ${groupName}👥
+┃⦁𝗬𝗼𝘂𝗿 𝗡𝘂𝗺𝗯𝗲𝗿 ${senderNumber}🙂
 │🤗🇱🇰❤️
-╰─────────────╯
+╰═════════════
 ╭𝗠𝗮𝗶𝗻 𝗠𝗘𝗡𝗨 ✅
-│${menu.main}
-╰─────────────╯
+┃${menu.main}
+╰═════════════
 ╭𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 𝗠𝗘𝗡𝗨 ⬇️
-│${menu.download}
-╰─────────────╯
+┃${menu.download}
+╰═════════════
 ╭𝗚𝗿𝗼𝘂𝗽 𝗠𝗘𝗡𝗨 👥
-│${menu.group}
-╰──────────────╯
+┃${menu.group}
+╰═════════════
 ╭𝗔𝗶 𝗠𝗘𝗡𝗨 🦾
-│${menu.ai}
-╰──────────────╯
+┃${menu.ai}
+╰═════════════
 ╭𝗔𝗱𝗺𝗶𝗻 𝗠𝗘𝗡𝗨 🧑‍💻
-│${menu.admin}
-╰──────────────╯
+┃${menu.admin}
+╰═════════════
 ╭𝗦𝗲𝗮𝗿𝗰𝗵 𝗠𝗘𝗡𝗨 🔎
-│${menu.search}
-╰──────────────╯
+┃${menu.search}
+╰═════════════
 ╭𝗖𝗼𝗻𝘃𝗲𝗿𝘁𝗲𝗿 𝗠𝗘𝗡𝗨 🧪
-│${menu.converter}
-╰──────────────╯
+┃${menu.converter}
+╰═════════════
 ╭𝗙𝘂𝗻 𝗠𝗘𝗡𝗨🙃
-│${menu.fun}
-╰──────────────╯
+┃${menu.fun}
+╰═════════════
 
 > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
         `;
