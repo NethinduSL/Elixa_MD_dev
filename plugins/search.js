@@ -144,3 +144,65 @@ weatherInfo += `\n`;
         reply(`*An error occurred while fetching weather data* ❗`);
     }
 });
+
+
+
+
+const axios = require('axios');
+const { cmd } = require('../command');
+
+cmd({
+    pattern: "lyrics",
+    category: "search",
+    desc: "Fetch song lyrics for a given song.",
+    use: '<song_name>',
+    react: "🎶",
+    filename: __filename,
+},
+    async (conn, mek, m, {
+        from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber,
+        botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName,
+        participants, groupAdmins, isBotAdmins, isAdmins, reply
+    }) => {
+
+    try {
+        q = args.join(" ").trim();
+        if (!q) {
+            return reply(`*Please provide a song name to fetch the lyrics* ❗`);
+        }
+
+        const apiUrl = `https://api.popcat.xyz/lyrics?song=${encodeURIComponent(q)}`;
+        const response = await axios.get(apiUrl);
+        const data = response.data;
+
+        if (!data || !data.lyrics) {
+            return reply(`*Lyrics not found for "${q}"* ❗`);
+        }
+
+        const { title, artist, lyrics, image } = data;
+
+        let lyricsInfo = "\n";
+        lyricsInfo += "🎶 𝗟𝘆𝗿𝗶𝗰𝘀 𝗜𝗻𝗳𝗼       \n";
+        lyricsInfo += "\n";
+        lyricsInfo += `🎵 Title    : ${title}\n\n`;
+        lyricsInfo += `🎤 Artist   : ${artist}\n\n`;
+        lyricsInfo += `📜 Lyrics   :\n\n${lyrics}`;
+        const footer = "\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺";
+
+        const thumbnailUrl = image || null;
+
+        if (thumbnailUrl) {
+            await conn.sendMessage(m.chat, {
+                image: { url: thumbnailUrl },
+                caption: lyricsInfo + footer,
+            }, { quoted: m });
+        } else {
+            await conn.sendMessage(m.chat, { text: lyricsInfo + footer }, { quoted: m });
+        }
+
+    } catch (error) {
+        console.error(error);
+        reply(`*An error occurred while fetching lyrics* ❗`);
+    }
+});
+
