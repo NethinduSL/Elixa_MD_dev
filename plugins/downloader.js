@@ -104,6 +104,7 @@ cmd({
     pattern: "tts",
     desc: "Convert text to speech.",
     category: "downloade",
+    react : "👇",
     filename: __filename,
     use: '<Enter your text here>',
 }, async (conn, mek, m, {
