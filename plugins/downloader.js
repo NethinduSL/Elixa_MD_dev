@@ -94,3 +94,56 @@ async (conn, mek, m, {
         reply(`Error: ${e}`);
     }
 });
+
+
+
+
+
+const googleTTS = require("google-tts-api");
+cmd({
+    pattern: "tts",
+    desc: "Convert text to speech.",
+    category: "downloader",
+    filename: __filename,
+    use: '<Enter your text here>',
+}, async (conn, mek, m, {
+    from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply
+}) => {
+    try {
+        const text = args.join(" ").trim();
+
+        if (!text) {
+            return reply("Please provide text to convert to speech.");
+        }
+
+        const ttsurl = googleTTS.getAudioUrl(text, {
+            lang: "en",
+            slow: false,
+            host: "https://translate.google.com",
+        });
+
+        await conn.sendMessage(
+            from,
+            {
+                audio: { url: ttsurl },
+                mimetype: "audio/mpeg",
+                fileName: `TTS.m4a`,
+            }
+        );
+
+        const caption = `
+╭𝗘ꟾ𝖎✘𝗮 𝗧𝗧𝗦 𝗔𝘂𝗱𝗶𝗼╮
+📌 Text: ${text}
+🔊 Language: English (en)
+🎧 Powered by Elixa MD
+
+> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
+`;
+
+        await conn.sendMessage(from, { text:caption }, { quoted: mek });
+    } catch (error) {
+        console.error("TTS Error:", error);
+        return conn.reply(`An error occurred while generating the TTS audio: ${error.message}`);
+    }
+});
+
