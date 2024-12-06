@@ -128,28 +128,44 @@ ${menu.main}
 });
 
 
-cmd({
-    pattern: "downloadmenu",
-    desc: "Menu of Elixa",
-    category: "menu",
-    react: "⬇️",
-    filename: __filename
-}, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
-    try {
-        let menu = {
-            download: '',
 
-        };
 
-        for (let i = 0; i < commands.length; i++) {
-            if (commands[i].pattern && !commands[i].dontAddCommandList) {
-                // Add pattern and description for each command
-                menu[commands[i].category] += `╭❰ .${commands[i].pattern}❱ \n┃ ${commands[i].desc || "No description provided"}\n╰═════════════════\n`;
+const { cmd, commands } = require('../command');
+
+const categories = {
+    main: "✅",
+    download: "⬇️",
+    group: "👥",
+    games: "🎮",
+    ai: "🦾",
+    admin: "🧑‍💻",
+    search: "🔎",
+    converter: "🧪",
+    fun: "🙃",
+    owner: "❤️"
+};
+
+Object.keys(categories).forEach(category => {
+    cmd({
+        pattern: `${category}menu`,
+        desc: `Menu of Elixa: ${category.charAt(0).toUpperCase() + category.slice(1)}`,
+        category: "menu",
+        react: categories[category],
+        filename: __filename
+    }, async (conn, mek, m, { from, pushname, groupName, senderNumber, reply }) => {
+        try {
+
+            let menu = {
+             [category]: '',
             }
-        }
+            for (let i = 0; i < commands.length; i++) {
+                if (commands[i].category === category && commands[i].pattern && !commands[i].dontAddCommandList) {
+                    menu[category] += `╭❰ .${commands[i].pattern} ❱ \n┃ ${commands[i].desc || "No description provided"}\n╰═════════════════\n`;
+                }
+            }
 
-        let Elixamenu = `
-╭ ❰  𝗘ꟾ𝖎✘𝗮 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝝡𝗲𝗻𝘂  ❱❱
+            let menuContent = `
+╭ ❰  𝗘ꟾ𝖎✘𝗮 ${category.charAt(0).toUpperCase() + category.slice(1)} 𝝡𝗲𝗻𝘂  ❱❱
 ┃    
 ╭𝗛𝗲𝗹𝗹𝗼 ${pushname} 𝗘ꟾ𝖎✘𝗮👋
 ┃⦁𝗶𝗻 𝗚𝗿𝗼𝘂𝗽 ${groupName}👥
@@ -157,22 +173,23 @@ cmd({
 │🤗🇱🇰❤️
 ╰═════════════
 
-╭𝗠𝗮𝗶𝗻 𝗠𝗘𝗡𝗨 ✅
-${menu.download}
+${menu[category] || "No commands available for this category."}
 
 > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
-        `;
+            `;
 
-        await conn.sendMessage(from, {
-            image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png" },
-            caption: Elixamenu
-        }, { quoted: mek });
+            await conn.sendMessage(from, {
+                image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png" },
+                caption: menuContent
+            }, { quoted: mek });
 
-    } catch (e) {
-        console.log(e);
-        reply(`${e}`);
-    }
+        } catch (e) {
+            console.error(e);
+            reply(`${e}`);
+        }
+    });
 });
+
 
 
 
