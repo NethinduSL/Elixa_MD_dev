@@ -103,7 +103,7 @@ const googleTTS = require("google-tts-api");
 cmd({
     pattern: "tts",
     desc: "Convert text to speech.",
-    category: "downloade",
+    category: "download",
     react : "👇",
     filename: __filename,
     use: '<Enter your text here>',
