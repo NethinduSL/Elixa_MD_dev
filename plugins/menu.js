@@ -130,7 +130,7 @@ ${menu.main}
 
 
 
-const { cmd, commands } = require('../command');
+
 
 const categories = {
     main: "✅",
