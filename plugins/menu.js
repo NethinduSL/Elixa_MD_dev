@@ -97,7 +97,7 @@ cmd({
         for (let i = 0; i < commands.length; i++) {
             if (commands[i].pattern && !commands[i].dontAddCommandList) {
                 // Add pattern and description for each command
-                menu[commands[i].category] += `╭❰ .${commands[i].pattern}❱ -┃ ${commands[i].desc || "No description provided"}\n╰═════════════════\n`;
+                menu[commands[i].category] += `╭❰ .${commands[i].pattern}❱ \n┃ ${commands[i].desc || "No description provided"}\n╰═════════════════\n`;
             }
         }
 
@@ -111,7 +111,6 @@ cmd({
 ╰═════════════
 ╭𝗠𝗮𝗶𝗻 𝗠𝗘𝗡𝗨 ✅
 ${menu.main}
-╰═════════════
 
 > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
         `;
