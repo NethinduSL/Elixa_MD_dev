@@ -97,7 +97,7 @@ cmd({
         for (let i = 0; i < commands.length; i++) {
             if (commands[i].pattern && !commands[i].dontAddCommandList) {
                 // Add pattern and description for each command
-                menu[commands[i].category] += `┃ .${commands[i].pattern} - ${commands[i].desc || "No description provided"}\n╰═════════════════`;
+                menu[commands[i].category] += `╭❰ .${commands[i].pattern}❱ -┃ ${commands[i].desc || "No description provided"}\n╰═════════════════\n`;
             }
         }
 
