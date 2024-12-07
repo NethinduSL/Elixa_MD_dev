@@ -4,6 +4,8 @@ const { runtime } = require('../lib/functions');
 const os = require('os');
 
 
+
+
 cmd({
     pattern: "remove",
     desc: "❌ Remove a group member by mentioning them.",
@@ -12,9 +14,9 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, args, reply }) => {
-    if (!isGroup) return reply("🚫 *This command can only be used in groups!*");
-    if (!isBotAdmins) return reply("⚠️ *I need admin privileges to remove members!*");
-    if (!isAdmins) return reply("🚨 *Only group admins can use this command!*");
+    if (!isGroup) return reply("*ᴏɴʟʏ ᴀʟʟᴏᴡᴇᴅ ɪɴ ɢʀᴏᴜᴘꜱ* 🚫nn> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺*");
+    if (!isBotAdmins) return reply("⚠️ **ᴍᴀᴋᴇ ᴍᴇ ᴀᴅᴍɪɴ*🙃/ɴ> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺ remove members!*");
+    if (!isAdmins) return reply("🚨 *ꜰᴏʀ ᴀᴅᴍɪɴꜱ ᴏɴʟʏ 😎*");
     
     const mentioned = m.message.extendedTextMessage?.contextInfo?.mentionedJid;
     if (!mentioned || mentioned.length === 0) return reply("📌 *Please mention a valid user to remove!*");
@@ -44,9 +46,9 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
-    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
-    if (!isBotAdmins) return reply("🚨 *I need admin privileges to promote members!*");
-    if (!isAdmins) return reply("⚠️ *Only group admins can use this command!*");
+    if (!isGroup) return reply("*ᴏɴʟʏ ᴀʟʟᴏᴡᴇᴅ ɪɴ ɢʀᴏᴜᴘꜱ* 🚫nn> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺*");
+    if (!isBotAdmins) return reply("*ᴍᴀᴋᴇ ᴍᴇ ᴀᴅᴍɪɴ*🙃/ɴ> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺ promote members!*");
+    if (!isAdmins) return reply("⚠️ *ꜰᴏʀ ᴀᴅᴍɪɴꜱ ᴏɴʟʏ 😎*");
 
     const mentioned = m.message.extendedTextMessage?.contextInfo?.mentionedJid;
     if (!mentioned || mentioned.length === 0) return reply("📌 *Please mention a valid user to promote!*");
@@ -79,9 +81,9 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
-    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
-    if (!isBotAdmins) return reply("🚨 *I need admin privileges to demote members!*");
-    if (!isAdmins) return reply("⚠️ *Only group admins can use this command!*");
+    if (!isGroup) return reply("*ᴏɴʟʏ ᴀʟʟᴏᴡᴇᴅ ɪɴ ɢʀᴏᴜᴘꜱ* 🚫nn> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺*");
+    if (!isBotAdmins) return reply("*ᴍᴀᴋᴇ ᴍᴇ ᴀᴅᴍɪɴ*🙃/ɴ> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺ demote members!*");
+    if (!isAdmins) return reply("⚠️ *ꜰᴏʀ ᴀᴅᴍɪɴꜱ ᴏɴʟʏ 😎*");
 
     const mentioned = m.message.extendedTextMessage?.contextInfo?.mentionedJid;
     if (!mentioned || mentioned.length === 0) return reply("📌 *Please mention a valid user to demote!*");
@@ -113,9 +115,9 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
-    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
-    if (!isBotAdmins) return reply("🚨 *I need admin privileges to mute members!*");
-    if (!isAdmins) return reply("⚠️ *Only group admins can use this command!*");
+    if (!isGroup) return reply("*ᴏɴʟʏ ᴀʟʟᴏᴡᴇᴅ ɪɴ ɢʀᴏᴜᴘꜱ* 🚫nn> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺*");
+    if (!isBotAdmins) return reply("*ᴍᴀᴋᴇ ᴍᴇ ᴀᴅᴍɪɴ*🙃/ɴ> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺ mute members!*");
+    if (!isAdmins) return reply("⚠️ *ꜰᴏʀ ᴀᴅᴍɪɴꜱ ᴏɴʟʏ 😎*");
 
     const mentioned = m.message.extendedTextMessage?.contextInfo?.mentionedJid;
     if (!mentioned || mentioned.length === 0) return reply("📌 *Please mention a valid user to mute!*");
@@ -149,9 +151,9 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
-    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
-    if (!isBotAdmins) return reply("🚨 *I need admin privileges to unmute members!*");
-    if (!isAdmins) return reply("⚠️ *Only group admins can use this command!*");
+    if (!isGroup) return reply("*ᴏɴʟʏ ᴀʟʟᴏᴡᴇᴅ ɪɴ ɢʀᴏᴜᴘꜱ* 🚫nn> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺*");
+    if (!isBotAdmins) return reply("*ᴍᴀᴋᴇ ᴍᴇ ᴀᴅᴍɪɴ*🙃/ɴ> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺ unmute members!*");
+    if (!isAdmins) return reply("⚠️ *ꜰᴏʀ ᴀᴅᴍɪɴꜱ ᴏɴʟʏ 😎*");
 
     const mentioned = m.message.extendedTextMessage?.contextInfo?.mentionedJid;
     if (!mentioned || mentioned.length === 0) return reply("📌 *Please mention a valid user to unmute!*");
@@ -182,7 +184,7 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, groupMetadata }) => {
-    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
+    if (!isGroup) return reply("*ᴏɴʟʏ ᴀʟʟᴏᴡᴇᴅ ɪɴ ɢʀᴏᴜᴘꜱ* 🚫nn> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺*");
 
     try {
         const group = await conn.groupMetadata(from);
@@ -210,7 +212,7 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, { from, isGroup, reply, groupMetadata }) => {
-    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
+    if (!isGroup) return reply("*ᴏɴʟʏ ᴀʟʟᴏᴡᴇᴅ ɪɴ ɢʀᴏᴜᴘꜱ* 🚫nn> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺*");
 
     try {
         const group = await conn.groupMetadata(from);
@@ -219,13 +221,13 @@ async (conn, mek, m, { from, isGroup, reply, groupMetadata }) => {
 
         const groupInfo = `
 *ℹ️ Group Info of ${group.subject}:*
-──────────────────
+╭─────────────────
 ┃📛 *Group Name*: ${group.subject}
 ┃💬 *Description*: ${group.desc || "No description available."}
 ┃👥 *Participants*: ${participantCount}
 ┃🧑‍💻 *Admins*: 
 ┃${admins}
-──────────────────
+╰─────────────────
 > 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘇𝗮 𝗠𝗗`;
 
         await conn.sendMessage(from, {
