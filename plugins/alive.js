@@ -17,24 +17,34 @@ async (conn, mek, m, {
 }) => {
     try {
         const Alive = `
-${config.ALIVE_MSG}
-
-╭ ❰ 𝗜𝗠   𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗  ❱❱
+        ╭ ❰ *ɪᴍ*  𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗 ❱❱
 ┃
-┃𝗛𝗜  ${pushname} 𝗜'𝗠 𝗔𝗹𝗶𝘃𝗲
+┃ *ʜɪ*  ${pushname} *ɪ'ᴍ ᴀʟɪᴠᴇ* 
 ┃
-┃⦁✅𝗥𝘂𝗻𝘁𝗶𝗺𝗲: ${runtime(process.uptime())}
-┃⦁🖥️𝗥𝗮𝗺: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${Math.round(os.totalmem() / 1024 / 1024)} MB
-┃⦁📍𝗛𝗼𝘀𝘁: ${os.hostname()}
+┃⦁✅ *ʀᴜɴᴛɪᴍᴇ*: ${runtime(process.uptime())}
+┃⦁🖥️ *ʀᴀᴍ* : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${Math.round(os.totalmem() / 1024 / 1024)} MB
+┃ *⦁👩‍💻ᴄʀᴇᴀᴛᴏʀ* : Nethindu Thaminda
+┃⦁🤝 *ᴏᴡɴᴇʀ* : ${config.OWNER}
 ┃
-┃⦁👩‍💻𝗖𝗿𝗲𝗮𝘁𝗼𝗿: Nethindu Thaminda
-┃⦁🤝𝗢𝘄𝗻𝗲𝗿: ${config.OWNER}
-┃
-┃⦁ᴛʏᴘᴇ .ᴍᴇɴᴜ ꜰᴏʀ ᴀʟʟ ᴄᴏᴍᴀɴᴅꜱ
 ╰═══════════════
-*ꜰʀᴏᴍ 🇱🇰 ʙʏ ᴇʙᴏx❤️*
 
-𝗯𝘆 𝗕𝗜𝗧 𝘅 ᵀᴹ
+> 𝙰𝙻𝙻 𝙼𝙴𝙽𝚄
+
+┃ *.𝚖𝚎𝚗𝚞* 📃
+┃ *.𝚖𝚊𝚒𝚗𝚖𝚎𝚗𝚞* ✅  
+┃*. 𝚍𝚘𝚠𝚗𝚕𝚘𝚊𝚍𝚖𝚎𝚗𝚞* ⬇️  
+┃ *.𝚐𝚛𝚘𝚞𝚙𝚖𝚎𝚗𝚞*  👥  
+┃ *.𝚐𝚊𝚖𝚎𝚜𝚖𝚎𝚗𝚞* 🎮  
+┃ *.𝚊𝚒𝚖𝚎𝚗𝚞*  🦾  
+┃ *.𝚊𝚍𝚖𝚒𝚗𝚖𝚎𝚗𝚞* 🧑‍💻  
+┃ *.𝚜𝚎𝚛𝚌𝚑𝚖𝚎𝚗𝚞* 🔎  
+┃ *.𝚌𝚘𝚗𝚟𝚎𝚛𝚝𝚎𝚛𝚖𝚎𝚗𝚞* 🧪  
+┃ *.𝚏𝚞𝚗𝚖𝚎𝚗𝚞* 🤗  
+┃ *.𝚘𝚠𝚗𝚎𝚛𝚖𝚎𝚗𝚞* ❤️
+╰═══════════════
+> 𝗯𝘆 𝗕𝗜𝗧 𝘅 ᵀᴹ
+
+> *ꜰʀᴏᴍ 🇱🇰 ʙʏ ᴇʙᴏx❤️*
 
 > 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮 𝗠𝗗`;
 
