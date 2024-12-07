@@ -198,3 +198,42 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, groupMetadat
         reply("❌ *Failed to fetch admin info.*");
     }
 });
+
+
+
+
+cmd({
+    pattern: "groupinfo",
+    desc: "ℹ️ Get detailed information about the group.",
+    category: "group",
+    react: "ℹ️",
+    filename: __filename
+},
+async (conn, mek, m, { from, isGroup, reply, groupMetadata }) => {
+    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
+
+    try {
+        const group = await conn.groupMetadata(from);
+        const participantCount = group.participants.length;
+        const admins = group.participants.filter(p => p.isAdmin).map(admin => `┃ @${admin.id.split('@')[0]}`).join("\n") || "No admins.";
+
+        const groupInfo = `
+*ℹ️ Group Info of ${group.subject}:*
+──────────────────
+┃📛 *Group Name*: ${group.subject}
+┃💬 *Description*: ${group.desc || "No description available."}
+┃👥 *Participants*: ${participantCount}
+┃🧑‍💻 *Admins*: 
+┃${admins}
+──────────────────
+> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘇𝗮 𝗠𝗗`;
+
+        await conn.sendMessage(from, {
+            text: groupInfo,
+            mentions: group.participants.filter(p => p.isAdmin).map(admin => admin.id)
+        });
+    } catch (e) {
+        console.error(e);
+        reply("❌ *Failed to fetch group info.*");
+    }
+});
