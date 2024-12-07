@@ -68,9 +68,8 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
 
 
 
-const config = require('../config');
-const { cmd, commands } = require('../command');
-const { fetchJson } = require('../lib/functions');
+
+
 
 cmd({
     pattern: "demote",
@@ -101,3 +100,75 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
         reply("❌ *Failed to demote the user. Make sure I have admin privileges.*");
     }
 });
+
+
+
+
+
+cmd({
+    pattern: "mute",
+    desc: "🔇 Mute a member in the group.",
+    category: "group",
+    react: "🔇",
+    filename: __filename
+},
+async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
+    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
+    if (!isBotAdmins) return reply("🚨 *I need admin privileges to mute members!*");
+    if (!isAdmins) return reply("⚠️ *Only group admins can use this command!*");
+
+    const mentioned = m.message.extendedTextMessage?.contextInfo?.mentionedJid;
+    if (!mentioned || mentioned.length === 0) return reply("📌 *Please mention a valid user to mute!*");
+
+    try {
+        const user = mentioned[0];
+        // Here, mute is implemented by making the user a non-admin
+        await conn.groupParticipantsUpdate(from, [user], "demote");
+        const username = user.split("@")[0];
+
+        await conn.sendMessage(from, {
+            text: `🔇 *Muted @${username} in the group!* \n\n> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮 𝗠𝗗`,
+            mentions: [user]
+        });
+    } catch (e) {
+        console.error(e);
+        reply("❌ *Failed to mute the user. Make sure I have admin privileges.*");
+    }
+});
+
+
+
+
+
+
+cmd({
+    pattern: "unmute",
+    desc: "🔊 Unmute a member in the group.",
+    category: "group",
+    react: "🔊",
+    filename: __filename
+},
+async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
+    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
+    if (!isBotAdmins) return reply("🚨 *I need admin privileges to unmute members!*");
+    if (!isAdmins) return reply("⚠️ *Only group admins can use this command!*");
+
+    const mentioned = m.message.extendedTextMessage?.contextInfo?.mentionedJid;
+    if (!mentioned || mentioned.length === 0) return reply("📌 *Please mention a valid user to unmute!*");
+
+    try {
+        const user = mentioned[0];
+        // Unmute is implemented by making the user an admin
+        await conn.groupParticipantsUpdate(from, [user], "promote");
+        const username = user.split("@")[0];
+
+        await conn.sendMessage(from, {
+            text: `🔊 *Unmuted @${username} in the group!* \n\n> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘇𝗮 𝗠𝗗`,
+            mentions: [user]
+        });
+    } catch (e) {
+        console.error(e);
+        reply("❌ *Failed to unmute the user. Make sure I have admin privileges.*");
+    }
+});
+
