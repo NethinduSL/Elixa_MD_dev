@@ -172,3 +172,29 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
     }
 });
 
+
+
+cmd({
+    pattern: "adminin",
+    desc: "👑 Get a list of admins in the group.",
+    category: "group",
+    react: "👑",
+    filename: __filename
+},
+async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, groupMetadata }) => {
+    if (!isGroup) return reply("⚠️ *This command can only be used in groups!*");
+
+    try {
+        const group = await conn.groupMetadata(from);
+        const admins = group.participants.filter(p => p.isAdmin);
+        const adminList = admins.map(admin => `👑 @${admin.id.split('@')[0]}`).join("\n") || "No admins in this group.";
+
+        await conn.sendMessage(from, {
+            text: `*👑 Admins of ${group.subject}*\n\n${adminList}\n\n> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘇𝗮 𝗠𝗗`,
+            mentions: admins.map(admin => admin.id)
+        });
+    } catch (e) {
+        console.error(e);
+        reply("❌ *Failed to fetch admin info.*");
+    }
+});
