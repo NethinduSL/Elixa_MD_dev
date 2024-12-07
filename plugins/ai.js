@@ -11,8 +11,8 @@ cmd({
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        let data = await fetchJson(`https://www.dark-yasiya-api.site/ai/chatgpt?q=hi${q}`);
-        return reply(`${data.message}`);
+        let data = await fetchJson(`https://bk9.fun/ai/gemini?q=${q}`);
+        return reply(`${data.BK9}`);
     } catch (e) {
         console.log(e);
         reply(`${e}`);
