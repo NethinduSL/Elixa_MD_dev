@@ -2,11 +2,12 @@ const config = require('../config');
 const { cmd, commands } = require('../command');
 const { fetchJson } = require('../lib/functions');
 
+
 cmd({
     pattern: "gemini",
-    desc: "Chat GPT 4.",
+    desc: "Interact with Gemini AI, a versatile model.",
     category: "ai",
-    react :"💫",
+    react: "✨",
     filename: __filename
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
@@ -19,12 +20,11 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
     }
 });
 
-
 cmd({
     pattern: "llama",
-    desc: "Chat GPT 4.",
+    desc: "Explore with the insightful Llama AI.",
     category: "ai",
-    react :"💫",
+    react: "🦙",
     filename: __filename
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
@@ -37,12 +37,11 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
     }
 });
 
-
 cmd({
     pattern: "jeeves",
-    desc: "Chat GPT 4.",
+    desc: "Jeeves AI, your personal assistant for queries.",
     category: "ai",
-    react :"💫",
+    react: "🤵",
     filename: __filename
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
@@ -55,12 +54,11 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
     }
 });
 
-
 cmd({
     pattern: "blackbox",
-    desc: "Chat GPT 4.",
+    desc: "BlackBox AI, the innovator's choice.",
     category: "ai",
-    react :"💫",
+    react: "📦",
     filename: __filename
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
@@ -73,14 +71,11 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
     }
 });
 
-
-
-
 cmd({
     pattern: "aiserch",
-    desc: "Chat GPT 4.",
+    desc: "AI Search for advanced information retrieval.",
     category: "ai",
-    react :"💫",
+    react: "🔍",
     filename: __filename
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
