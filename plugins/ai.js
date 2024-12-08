@@ -72,3 +72,23 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         reply(`${e}`);
     }
 });
+
+
+
+
+cmd({
+    pattern: "aiserch",
+    desc: "Chat GPT 4.",
+    category: "ai",
+    react :"💫",
+    filename: __filename
+},
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        let data = await fetchJson(`https://bk9.fun/ai/ai-search?q=${q}`);
+        return reply(`${data.BK9}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`);
+    } catch (e) {
+        console.log(e);
+        reply(`${e}`);
+    }
+});
