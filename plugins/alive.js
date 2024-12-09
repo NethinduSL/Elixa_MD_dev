@@ -83,7 +83,7 @@ async (conn, mek, m, {
         if (config.ALIVE_MODE === "elixa") {
             await conn.sendMessage(from, { image: { url: config.ALIVE_IMG }, caption: Alive }, { quoted: mek });
         } else if (config.ALIVE_MODE === "hack") {
-            await conn.sendMessage(from, { image: { url: "" }, caption: Alive2 }, { quoted: mek });
+            await conn.sendMessage(from, { image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/hack.png" }, caption: Alive2 }, { quoted: mek });
         } else {
             reply("Invalid ALIVE_MODE in config.js. Please set it to 'elixa' or 'hack'.");
         }
