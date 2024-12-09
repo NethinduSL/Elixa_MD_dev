@@ -1,7 +1,7 @@
 const config = require('../config');
 const { cmd } = require('../command');
 const { runtime } = require('../lib/functions');
-const os = require('os'); // Corrected require statement
+const os = require('os');
 
 cmd({
     pattern: "alive",
@@ -11,9 +11,7 @@ cmd({
     filename: __filename
 },
 async (conn, mek, m, {
-    from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, 
-    botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, 
-    participants, groupAdmins, isBotAdmins, isAdmins, reply
+    from, quoted, pushname, reply
 }) => {
     try {
         const Alive = `
@@ -32,7 +30,7 @@ async (conn, mek, m, {
 
 ┃ *.𝚖𝚎𝚗𝚞* 📃
 ┃ *.𝚖𝚊𝚒𝚗𝚖𝚎𝚗𝚞* ✅  
-┃ *. 𝚍𝚘𝚠𝚗𝚕𝚘𝚊𝚍𝚖𝚎𝚗𝚞* ⬇️  
+┃ *.𝚍𝚘𝚠𝚗𝚕𝚘𝚊𝚍𝚖𝚎𝚗𝚞* ⬇️  
 ┃ *.𝚐𝚛𝚘𝚞𝚙𝚖𝚎𝚗𝚞*  👥  
 ┃ *.𝚐𝚊𝚖𝚎𝚜𝚖𝚎𝚗𝚞* 🎮  
 ┃ *.𝚊𝚒𝚖𝚎𝚗𝚞*  🦾  
@@ -47,7 +45,6 @@ async (conn, mek, m, {
 > *ꜰʀᴏᴍ 🇱🇰 ʙʏ ᴇʙᴏx❤️*
 
 > 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮 𝗠𝗗`;
-
 
         const Alive2 = `
 ╭ ❰ *ɪᴍ*  𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗 ❱❱
@@ -65,7 +62,7 @@ async (conn, mek, m, {
 
 ┃ *.𝚖𝚎𝚗𝚞* 📃
 ┃ *.𝚖𝚊𝚒𝚗𝚖𝚎𝚗𝚞* ✅  
-┃ *. 𝚍𝚘𝚠𝚗𝚕𝚘𝚊𝚍𝚖𝚎𝚗𝚞* ⬇️  
+┃ *.𝚍𝚘𝚠𝚗𝚕𝚘𝚊𝚍𝚖𝚎𝚗𝚞* ⬇️  
 ┃ *.𝚐𝚛𝚘𝚞𝚙𝚖𝚎𝚗𝚞*  👥  
 ┃ *.𝚐𝚊𝚖𝚎𝚜𝚖𝚎𝚗𝚞* 🎮  
 ┃ *.𝚊𝚒𝚖𝚎𝚗𝚞*  🦾  
@@ -81,35 +78,15 @@ async (conn, mek, m, {
 
 > 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮 𝗠𝗗`;
 
-        
-
-
-if (config.ALIVE_MODE === "elixa") {
-             await conn.sendMessage(from, {
-            image: { url: config.ALIVE_IMG },
-            caption: Alive
-        }, { quoted: mek });
-
-
+        if (config.ALIVE_MODE === "elixa") {
+            await conn.sendMessage(from, { image: { url: config.ALIVE_IMG }, caption: Alive }, { quoted: mek });
         } else if (config.ALIVE_MODE === "hack") {
-           
- await conn.sendMessage(from, {
-            image: { url: config.ALIVE_IMG },
-            caption: Alive2
-        }, { quoted: mek });
-
-
+            await conn.sendMessage(from, { image: { url: config.ALIVE_IMG }, caption: Alive2 }, { quoted: mek });
         } else {
             reply("Invalid ALIVE_MODE in config.js. Please set it to 'elixa' or 'hack'.");
-}
+        }
 
-        
- 
-
-        await conn.sendMessage(from, {
-            react: { text: '❤️', key: sentMsg.key } // React to the message just sent
-        });
-
+        await conn.sendMessage(from, { react: { text: '❤️', key: mek.key } });
     } catch (e) {
         console.log(e);
         reply(`${e}`);
