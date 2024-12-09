@@ -2,6 +2,10 @@ const config = require('../config');
 const { cmd, commands } = require('../command');
 const fg = require('api-dylux');
 const yts = require('yt-search');
+const axios = require('axios');
+const { fetchJson } = require('../lib/functions');
+
+
 
 cmd({
     pattern: "song",
@@ -148,4 +152,75 @@ cmd({
         return conn.reply(`An error occurred while generating the TTS audio: ${error.message}`);
     }
 });
+
+
+
+
+
+
+
+
+cmd({
+    pattern: "apk",
+    desc: "Convert text to speech.",
+    category: "download",
+    filename: __filename,
+    use: '<Enter your text here>',
+}, async (conn, mek, m, {
+    from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply
+}) => {
+    try {
+        const text = args.join(" ").trim();
+
+        if (!text) {
+            return reply("Please provide text to convert to speech.");
+        }
+
+        // Fetch the APK details
+        const data = await axios.get(`https://bk9.fun/download/apk?id=${q}`);
+
+        // Construct the message using the fetched data
+        const message = `
+╭❰𝗘ꟾ𝖎✘𝗮 𝗔𝗣𝗞❱❱
+┃
+╰📌 App: ${data.data.BK9.name}
+╰📅 Last Updated: ${data.data.BK9.lastup}
+╰🛠️ Package: ${data.data.BK9.package}
+╰═══════════════
+> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
+`;
+
+        // Send the download link first
+        
+        // Sending the image and message
+        await conn.sendMessage(from, {
+            image: { url: data.data.BK9.icon },
+            caption: message
+        }, { quoted: mek });
+
+
+const downloadMessage = `ᴅᴏᴡɴʟᴏᴀᴅ ꜱᴘᴇᴇᴅ ɪꜱ ᴅᴇᴘᴇɴᴅ ᴏɴ ꜱᴇʀᴠᴇʀ ʀᴀᴍ ꜱᴏᴍᴇᴛɪᴍᴇꜱ ɪᴛ ᴍᴀʏ ʙᴇ ɴᴏᴛ ᴅᴏᴡɴʟᴏᴀᴅᴅᴇᴅ ᴛʜᴇɴ ᴜꜱᴇ ʟɪɴᴋ\ɴ\ɴ📥 Click the link to download the APK: ${data.data.BK9.dllink}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`;
+        await conn.sendMessage(from, {
+            text: downloadMessage
+        }, { quoted: mek });
+
+
+
+        
+        // Sending the APK file
+        await conn.sendMessage(
+            from,
+            {
+                audio: { url: data.data.BK9.dllink },
+                mimetype: "application/vnd.android.package-archive",
+                fileName: `${q}.apk`,
+            }
+        );
+
+    } catch (error) {
+        console.error("TTS Error:", error);
+        return conn.reply(`An error occurred while generating the TTS audio: ${error.message}`);
+    }
+});
+
 
