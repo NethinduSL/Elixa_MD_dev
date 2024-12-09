@@ -19,6 +19,6 @@ module.exports = {
     AUTO_VOICE: process.env.AUTO_VOICE || "true",
 //╰────────────────────────────────────────────────╯//
 
-    API: process.env.API || "true",
+    ALIVE_MODE: process.env.ALIVE_MODE || "dark", // modes are elix and hack
     
 };
