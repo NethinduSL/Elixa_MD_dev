@@ -4,6 +4,27 @@ const { fetchJson } = require('../lib/functions');
 
 
 cmd({
+    pattern: "ai",
+    desc: "AI Search for advanced information retrieval.",
+    category: "ai",
+    react: "😎",
+    filename: __filename
+},
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        let data = await fetchJson(`https://bk9.fun/ai/GPT4o?${q}=hi&userId=${senderNumber}`);
+        return reply(`${data.BK9}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`);
+    } catch (e) {
+        console.log(e);
+        reply(`${e}`);
+    }
+});
+
+
+
+
+
+cmd({
     pattern: "gemini",
     desc: "Interact with Gemini AI, a versatile model.",
     category: "ai",
@@ -38,10 +59,10 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 });
 
 cmd({
-    pattern: "jeeves",
+    pattern: "blackbox",
     desc: "Jeeves AI, your personal assistant for queries.",
     category: "ai",
-    react: "🤵",
+    react: "📦",
     filename: __filename
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
@@ -55,10 +76,10 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 });
 
 cmd({
-    pattern: "blackbox",
+    pattern: "jeeves",
     desc: "BlackBox AI, the innovator's choice.",
     category: "ai",
-    react: "📦",
+    react: "🫡",
     filename: __filename
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
