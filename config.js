@@ -19,5 +19,6 @@ module.exports = {
     AUTO_VOICE: process.env.AUTO_VOICE || "true",
 //╰────────────────────────────────────────────────╯//
 
+    API: process.env.API || "true",
     
 };
