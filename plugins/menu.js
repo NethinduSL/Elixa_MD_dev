@@ -64,8 +64,19 @@ cmd({
 > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
         `;
 
+if (config.ALIVE_MODE === "elixa") {
+            await conn.sendMessage(from, {image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png" },caption: Elixamenu }, { quoted: mek });
 
-await conn.sendMessage(from, {image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png" },caption: Elixamenu }, { quoted: mek });
+
+} else if (config.ALIVE_MODE === "hack") {
+            await conn.sendMessage(from, {image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/hack.png" },caption: Elixamenu }, { quoted: mek });
+
+} else {
+            reply("Invalid ALIVE_MODE in config.js. Please set it to 'elixa' or 'hack'.");
+}
+
+
+        
 
 
     } catch (e) {
@@ -127,11 +138,16 @@ ${menu[category] || "No commands available for this category."}
 > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
             `;
 
-            await conn.sendMessage(from, {
-                image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png" },
-                caption: menuContent
-            }, { quoted: mek });
+            if (config.ALIVE_MODE === "elixa") {
+            await conn.sendMessage(from, {image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png" },caption: menuContent }, { quoted: mek });
 
+
+} else if (config.ALIVE_MODE === "hack") {
+            await conn.sendMessage(from, {image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png" },caption: menuContent }, { quoted: mek });
+
+} else {
+            reply("Invalid ALIVE_MODE in config.js. Please set it to 'elixa' or 'hack'.");
+}
         } catch (e) {
             console.error(e);
             reply(`${e}`);
