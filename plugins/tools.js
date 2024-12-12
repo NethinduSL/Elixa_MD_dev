@@ -170,3 +170,25 @@ Example: ${entry.example.replace(/\[/g, "").replace(/\]/g, "")}
     }
 });
 
+
+cmd({
+    pattern: "quotes",
+    desc: "Sends quotes in chat.",
+    category: "fun",
+    filename: __filename,
+}, async (Void, citel, text) => {
+    try {
+        const quoo = await axios.get(`https://favqs.com/api/qotd`);
+        const replyf = `
+╭═════════════════
+┃ *🗂Content:* ${quoo.data.quote.body}
+┃ *👤Author:* ${quoo.data.quote.author}
+╰═════════════════
+
+> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`
+        return citel.reply(replyf);
+    } catch (error) {
+        console.error("An error occurred while fetching the quote:", error);
+        return citel.reply("An error occurred while fetching the quote. Please try again later.");
+    }
+});
