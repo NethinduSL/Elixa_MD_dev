@@ -140,6 +140,7 @@ cmd({
     pattern: "define",
     desc: "Fetch definitions from Urban Dictionary.",
     category: "fun",
+    react: "💖",
     filename: __filename,
 }, async (Void, citel, q) => {
     try {
