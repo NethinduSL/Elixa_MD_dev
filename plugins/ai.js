@@ -1,6 +1,6 @@
 const config = require('../config');
 const { cmd, commands } = require('../command');
-const { fetchJson } = require('../lib/functions');
+const { fetchJson, getBuffer } = require('../lib/functions');
 
 
 
