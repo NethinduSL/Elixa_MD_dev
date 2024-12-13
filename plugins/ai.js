@@ -20,7 +20,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
         const text = args.join(" ");
         const aiimg = `https://bk9.fun/ai/magicstudio?prompt=${encodeURIComponent(text)}`;
-        const buffer = await aiimg(qrCodeUrl);
+        const buffer = await getBuffer(aiimg);
 
         await conn.sendMessage(from, { image: buffer, caption: `Here is your Image code for: ${text}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺` }, { quoted: mek });
     } catch (e) {
