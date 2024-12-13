@@ -36,7 +36,7 @@ cmd({
             return citel.reply("Please provide a word to define.");
         }
 
-        const response = await axios.get(`http://api.urbandictionary.com/v0/define?term=$(q)`);
+        const response = await axios.get(`http://api.urbandictionary.com/v0/define?term=${q}`);
         const data = response.data;
 
         if (data.list && data.list.length > 0) {
