@@ -6,7 +6,8 @@ let cap = `> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 �
 
 cmd({
     pattern: "deepsea", 
-    category: "textpro", 
+    category: "textpro",
+    react:"🎆",
     desc: "Some text to image feature with various styles."
 }, async (conn, mek, m, { 
     from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, 
@@ -14,6 +15,7 @@ cmd({
     participants, groupAdmins, isBotAdmins, isAdmins, reply 
 }) => {
     const text = args.join(" ").trim();
+    
     if (!text) return reply('_Need text._');
 
     try {
