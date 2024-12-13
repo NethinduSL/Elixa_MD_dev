@@ -3,6 +3,33 @@ const { cmd, commands } = require('../command');
 const { fetchJson } = require('../lib/functions');
 
 
+
+
+cmd({
+    pattern: "aiimg",
+    category: "ai",
+    react: "🎆",
+    filename: __filename,
+    desc: "aai image genarater"
+},
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        if (args.length === 0) {
+            return reply("Please provide the text to generate the QR code.");
+        }
+
+        const text = args.join(" ");
+        const aiimg = `https://bk9.fun/ai/magicstudio?prompt=${encodeURIComponent(text)}`;
+        const buffer = await aiimg(qrCodeUrl);
+
+        await conn.sendMessage(from, { image: buffer, caption: `Here is your Image code for: ${text}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺` }, { quoted: mek });
+    } catch (e) {
+        console.error(e);
+        mek.reply("An error occurred while generating the QR code. Please try again.");
+    }
+});
+
+
 cmd({
     pattern: "ai",
     desc: "AI Search for advanced information retrieval.",
