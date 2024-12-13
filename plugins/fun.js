@@ -24,6 +24,7 @@ cmd({
     pattern: "readmore",
     desc: "Sends a readmore.",
     category: "fun",
+        react :"🥲",
     filename: __filename,
 },
 async (conn, mek, m, {
