@@ -79,35 +79,25 @@ async (conn, mek, m, { from, body, isOwner }) => {
 
 
 
-const badWordsFilePath = path.join(__dirname, '../Elixa/badword.json');
+// Load bad words from a JSON file or define them directly
+const badWords = ["bad", "badword2", "badword3"]; // Replace with actual bad words
 
-function loadBadWords() {
-  try {
-    if (fs.existsSync(badWordsFilePath)) {
-      const data = fs.readFileSync(badWordsFilePath, 'utf8');
-      return JSON.parse(data);
-    } else {
-      console.error(`Bad words file not found: ${badWordsFilePath}`);
-      return [];
-    }
-  } catch (error) {
-    console.error(`Error loading bad words: ${error.message}`);
-    return [];
-  }
+// Function to check if the message contains bad words
+function containsBadWord(body) {
+  return badWords.some(word => body.toLowerCase().includes(word));
 }
 
-function containsBadWord(body, badWords) {
-  return badWords.some(word => body.toLowerCase().includes(word.toLowerCase()));
-}
-
+// Bad Word Detector
 cmd({
   on: 'body'
 }, async (conn, mek, m, { from, body }) => {
   try {
-    const badWords = loadBadWords();
-
-    if (containsBadWord(body, badWords)) {
+    // Check if the message contains any bad words
+    if (containsBadWord(body)) {
+      // Delete the message
       await conn.deleteMessage(from, mek.key);
+
+      // Send "badvguy" message
       await conn.sendMessage(from, { text: "Bad word detected! 🚫 You're a badvguy!" }, { quoted: mek });
     }
   } catch (error) {
