@@ -79,28 +79,50 @@ async (conn, mek, m, { from, body, isOwner }) => {
 
 
 
-// Load bad words from a JSON file or define them directly
-const badWords = ["bad", "badword2", "badword3"]; // Replace with actual bad words
+//
 
-// Function to check if the message contains bad words
-function containsBadWord(body) {
-  return badWords.some(word => body.toLowerCase().includes(word));
-}
 
-// Bad Word Detector
-cmd({
-  on: 'body'
-}, async (conn, mek, m, { from, body }) => {
+
+
+
+const badWordsFilePath = path.join(__dirname, '../Elixa/badword.json');
+
+// Function to load bad words from the JSON file
+function loadBadWords() {
   try {
-    // Check if the message contains any bad words
-    if (containsBadWord(body)) {
-      // Delete the message
-      await conn.deleteMessage(from, mek.key);
-
-      // Send "badvguy" message
-      await conn.sendMessage(from, { text: "Bad word detected! 🚫 You're a badvguy!" }, { quoted: mek });
+    if (fs.existsSync(badWordsFilePath)) {
+      const data = fs.readFileSync(badWordsFilePath, 'utf8');
+      return JSON.parse(data);
+    } else {
+      console.error(`Bad words file not found: ${badWordsFilePath}`);
+      return [];
     }
   } catch (error) {
-    console.error(`Error in Bad Word Detector: ${error.message}`);
+    console.error(`Error loading bad words: ${error.message}`);
+    return [];
+  }
+}
+
+// Function to check if a message contains any bad words
+function containsBadWord(body, badWords) {
+  return badWords.some(word => new RegExp(`\\b${word}\\b`, 'i').test(body));
+}
+
+cmd({
+  on: 'body'
+},
+async (conn, mek, m, { from, body, isOwner }) => {
+  try {
+    const badWords = loadBadWords();
+    
+    // Check if the message contains a bad word
+    if (containsBadWord(body, badWords)) {
+      // Delete the message
+      await conn.deleteMessage(from, mek.key);
+      await conn.sendMessage(from, { text: "Bad word detected! 🚫 You're a badvguy!" }, { quoted: mek });
+      
+    }
+  } catch (error) {
+    console.error(`Error in bad word filter: ${error.message}`);
   }
 });
