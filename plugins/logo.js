@@ -1,4 +1,4 @@
-const maker = require('mumaker');
+/*const maker = require('mumaker');
 const config = require('../config');
 const { cmd, commands } = require('../command');
 
@@ -29,4 +29,4 @@ cmd({
         console.error(error);
         reply('_Something went wrong. Try again later._');
     }
-});
+});*/
