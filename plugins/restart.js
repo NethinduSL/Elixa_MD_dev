@@ -17,7 +17,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         }
 
         const { exec } = require("child_process");
-        reply("Restarting Elix✅🇱🇰...\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺");
+        reply("Restarting Elixa✅🇱🇰...\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺");
         await sleep(1500);
 
         exec("pm2 restart all", (error, stdout, stderr) => {
