@@ -52,10 +52,10 @@ cmd({
         const response = await axios.get('https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/publicconfig.js');
         
         // Access the NT value from the response data
-        const jbValue = response.data.JB;  // Ensure this is correct based on the response structure
+        const JBValue = response.data.JB;  // Ensure this is correct based on the response structure
         
         // Send the NT value in the reply
-        await reply(`${jbValue}\n\n> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘇𝗮 ‐𝝡𝗗༺`);
+        await reply(`${JBValue}\n\n> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘇𝗮 ‐𝝡𝗗༺`);
         
         // React to the message
         await conn.sendMessage(from, {
@@ -87,10 +87,10 @@ cmd({
         const response = await axios.get('https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/publicconfig.js');
         
         // Access the NT value from the response data
-        const jbValue = response.data.JB;  // Ensure this is correct based on the response structure
+        const upValue = response.data.UPDATE;  // Ensure this is correct based on the response structure
         
         // Send the NT value in the reply
-        await reply(`${jbValue}\n\n> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘇𝗮 ‐𝝡𝗗༺`);
+        await reply(`${upValue}\n\n> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘇𝗮 ‐𝝡𝗗༺`);
         
         // React to the message
         await conn.sendMessage(from, {
