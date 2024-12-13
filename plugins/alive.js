@@ -21,7 +21,7 @@ async (conn, mek, m, {
 ┃
 ┃⦁✅ *ʀᴜɴᴛɪᴍᴇ*: ${runtime(process.uptime())}
 ┃⦁🖥️ *ʀᴀᴍ* : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${Math.round(os.totalmem() / 1024 / 1024)} MB
-┃ *⦁👩‍💻ᴄʀᴇᴀᴛᴏʀ* : Nethindu Thaminda
+┃ *⦁👩‍💻ᴄʀᴇᴀᴛᴏʀ* : Nethindu,Jithula
 ┃⦁🤝 *ᴏᴡɴᴇʀ* : ${config.OWNER}
 ╰═══════════════
 
