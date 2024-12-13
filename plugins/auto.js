@@ -75,4 +75,42 @@ async (conn, mek, m, { from, body, isOwner }) => {
   } catch (error) {
     console.error(`Error in Auto Reply: ${error.message}`);
   }
+})
+
+
+
+const badWordsFilePath = path.join(__dirname, '../Elixa/badword.json');
+
+function loadBadWords() {
+  try {
+    if (fs.existsSync(badWordsFilePath)) {
+      const data = fs.readFileSync(badWordsFilePath, 'utf8');
+      return JSON.parse(data);
+    } else {
+      console.error(`Bad words file not found: ${badWordsFilePath}`);
+      return [];
+    }
+  } catch (error) {
+    console.error(`Error loading bad words: ${error.message}`);
+    return [];
+  }
+}
+
+function containsBadWord(body, badWords) {
+  return badWords.some(word => body.toLowerCase().includes(word.toLowerCase()));
+}
+
+cmd({
+  on: 'body'
+}, async (conn, mek, m, { from, body }) => {
+  try {
+    const badWords = loadBadWords();
+
+    if (containsBadWord(body, badWords)) {
+      await conn.deleteMessage(from, mek.key);
+      await conn.sendMessage(from, { text: "Bad word detected! 🚫 You're a badvguy!" }, { quoted: mek });
+    }
+  } catch (error) {
+    console.error(`Error in Bad Word Detector: ${error.message}`);
+  }
 });
