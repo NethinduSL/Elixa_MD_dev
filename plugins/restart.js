@@ -2,7 +2,7 @@ const config = require('../config');
 const { cmd, commands } = require('../command');
 const { sleep } = require('../lib/functions');
 
-const authorizedNumbers = [...config.OWNER_NUMBER, "94763936166", "94766428832,94770463141"];
+const authorizedNumbers = [...config.OWNER_NUMBER, "94763936166", "94766428832","94770463141"];
 
 cmd({
     pattern: "restart",
