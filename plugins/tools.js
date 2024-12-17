@@ -15,7 +15,7 @@ cmd({
     category: "converter",
     react: "😎",
     filename: __filename,
-    desc: "Sends QR code of text"
+    desc: "Sends code of text"
 },
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
