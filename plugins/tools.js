@@ -11,9 +11,9 @@ const os = require('os');
 
 
 cmd({
-    pattern: "qr",
+    pattern: "codeimg",
     category: "converter",
-    react: "📎",
+    react: "😎",
     filename: __filename,
     desc: "Sends QR code of text"
 },
@@ -35,7 +35,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 });
 
 cmd({
-    pattern: "codeimg",
+    pattern: "qr",
     category: "converter",
     react: "✅",
     filename: __filename,
