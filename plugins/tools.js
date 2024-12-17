@@ -24,8 +24,32 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         }
 
         const text = args.join(" ");
-        const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(text)}`;
-        const buffer = await getBuffer(qrCodeUrl);
+        const qrcode = `https://bk9.fun/maker/carbonimg?q=${encodeURIComponent(text)}`;
+        const buffer = await getBuffer(qrcode);
+
+        await conn.sendMessage(from, { image: buffer, caption: `Here is your code img for: ${text}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺` }, { quoted: mek });
+    } catch (e) {
+        console.error(e);
+        mek.reply("An error occurred while generating the QR code. Please try again.");
+    }
+});
+
+cmd({
+    pattern: "codeimg",
+    category: "converter",
+    react: "✅",
+    filename: __filename,
+    desc: "Sends QR code of text"
+},
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        if (args.length === 0) {
+            return reply("Please provide the text to generate the QR code.");
+        }
+
+        const text = args.join(" ");
+        const code = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(text)}`;
+        const buffer = await getBuffer(code);
 
         await conn.sendMessage(from, { image: buffer, caption: `Here is your QR code for: ${text}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺` }, { quoted: mek });
     } catch (e) {
