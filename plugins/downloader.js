@@ -1,17 +1,16 @@
 const config = require('../config');
 const { cmd, commands } = require('../command');
-const fg = require('api-dylux');
+const ytdl = require('ytdl-core'); // Import ytdl-core for downloading
 const yts = require('yt-search');
 const axios = require('axios');
 const { fetchJson } = require('../lib/functions');
 
-
-
+// Download song
 cmd({
     pattern: "song",
     desc: "Download Songs By Elixa.",
     category: "download",
-    react : "🎵",
+    react: "🎵",
     filename: __filename
 },
 async (conn, mek, m, {
@@ -26,7 +25,7 @@ async (conn, mek, m, {
         let desc = `
 ╭❰𝗘ꟾ𝖎✘𝗮 𝗠𝗗 𝗦𝗼𝗻𝗴 🎵 ❱❱
 │
-╰📌𝗧𝗶𝘁𝗹𝗲: ${data.title}
+╰📌𝗧𝗶𝗧𝗹𝗲: ${data.title}
 ╰🔗𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻: ${data.description}
 ╰🕦𝗧𝗶𝗺𝗲: ${data.timestamp}
 ╰📤𝗔𝗴𝗼: ${data.ago}
@@ -38,13 +37,13 @@ async (conn, mek, m, {
 
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
-        // download audio
-        let down = await fg.yta(url); // Use the video's URL for downloading
-        let downloadUrl = down.dl_url;
+        // download audio using ytdl-core
+        let down = await ytdl(url, { filter: 'audioonly' }); // Use the video's URL for downloading audio
+        let downloadUrl = down;
 
         // send audio
-        await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mp3", fileName: data.title + ".mp3", caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗" }, { quoted: mek });
+        await conn.sendMessage(from, { audio: downloadUrl, mimetype: "audio/mpeg" }, { quoted: mek });
+        await conn.sendMessage(from, { document: downloadUrl, mimetype: "audio/mp3", fileName: data.title + ".mp3", caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
@@ -52,13 +51,12 @@ async (conn, mek, m, {
     }
 });
 
-//---------------------------video--------------------------
-
+// Download video
 cmd({
     pattern: "video",
     desc: "Download videos By Elixa.",
     category: "download",
-    react :"🎬",
+    react: "🎬",
     filename: __filename
 },
 async (conn, mek, m, {
@@ -70,10 +68,10 @@ async (conn, mek, m, {
         const data = search.videos[0];
         const url = data.url;
 
-        let desc = `        
+        let desc = `
 ╭❰𝗘ꟾ𝖎✘𝗮 𝗠𝗗 𝗩𝗶𝗱𝗲𝗼 🎬❱❱
 ┃
-╰📌𝗧𝗶𝘁𝗹𝗲: ${data.title}
+╰📌𝗧𝗶𝗧𝗹𝗲: ${data.title}
 ╰🔗𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻: ${data.description}
 ╰🕦𝗧𝗶𝗺𝗲: ${data.timestamp}
 ╰📤𝗔𝗴𝗼: ${data.ago}
@@ -85,91 +83,16 @@ async (conn, mek, m, {
 
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
-        // download video
-        let down = await fg.ytv(url); // Use the video's URL for downloading
-        let downloadUrl = down.dl_url;
+        // download video using ytdl-core
+        let down = await ytdl(url, { quality: 'highestvideo' }); // Use the video's URL for downloading video
+        let downloadUrl = down;
 
         // send video
-        await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4" }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: data.title + ".mp4", caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗" }, { quoted: mek });
+        await conn.sendMessage(from, { video: downloadUrl, mimetype: "video/mp4" }, { quoted: mek });
+        await conn.sendMessage(from, { document: downloadUrl, mimetype: "video/mp4", fileName: data.title + ".mp4", caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
         reply(`Error: ${e}`);
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-cmd({
-    pattern: "apk",
-    desc: "Convert text to speech.",
-    category: "download",
-    filename: __filename,
-    use: '<Enter your text here>',
-}, async (conn, mek, m, {
-    from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply
-}) => {
-    try {
-        const text = args.join(" ").trim();
-
-        if (!text) {
-            return reply("Please provide text to convert to speech.");
-        }
-
-        // Fetch the APK details
-        const data = await axios.get(`https://bk9.fun/download/apk?id=${q}`);
-
-        // Construct the message using the fetched data
-        const message = `
-╭❰𝗘ꟾ𝖎✘𝗮 𝗔𝗣𝗞❱❱
-┃
-╰📌 App: ${data.data.BK9.name}
-╰📅 Last Updated: ${data.data.BK9.lastup}
-╰🛠️ Package: ${data.data.BK9.package}
-╰═══════════════
-> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
-`;
-
-        // Send the download link first
-        
-        // Sending the image and message
-        await conn.sendMessage(from, {
-            image: { url: data.data.BK9.icon },
-            caption: message
-        }, { quoted: mek });
-
-
-const downloadMessage = `ᴅᴏᴡɴʟᴏᴀᴅ ꜱᴘᴇᴇᴅ ɪꜱ ᴅᴇᴘᴇɴᴅ ᴏɴ ꜱᴇʀᴠᴇʀ ʀᴀᴍ ꜱᴏᴍᴇᴛɪᴍᴇꜱ ɪᴛ ᴍᴀʏ ʙᴇ ɴᴏᴛ ᴅᴏᴡɴʟᴏᴀᴅᴅᴇᴅ ᴛʜᴇɴ ᴜꜱᴇ ʟɪɴᴋ\n\n📥 Click the link to download the APK: ${data.data.BK9.dllink}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`;
-        await conn.sendMessage(from, {
-            text: downloadMessage
-        }, { quoted: mek });
-
-
-
-        
-        // Sending the APK file
-        await conn.sendMessage(
-            from,
-            {
-                audio: { url: data.data.BK9.dllink },
-                mimetype: "application/vnd.android.package-archive",
-                fileName: `${q}.apk`,
-            }
-        );
-
-    } catch (error) {
-        console.error("TTS Error:", error);
-        return conn.reply(`An error occurred while generating the TTS audio: ${error.message}`);
-    }
-});
-
-
