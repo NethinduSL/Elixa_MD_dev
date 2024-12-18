@@ -71,7 +71,7 @@ cmd({
 
 
 cmd({
-    pattern: "upadetL",
+    pattern: "updateL",
     desc: "update bot",
     category: "owner",
     react: "✅",
