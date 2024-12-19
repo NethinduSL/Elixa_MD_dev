@@ -38,11 +38,10 @@ cmd({
 
             // Loop through each movie in the response and append its details
             response.data.data.forEach(movie => {
-                movieDetails += `╰🎬 Title      : ${movie.movieName}\n`;
-                movieDetails += `╰📅 Year       : ${movie.year}\n`;
-                movieDetails += `╰⭐ imdbRating : ${movie.imdbRating}\n`;
-                movieDetails += `╰📷 Thumbnail  : ${movie.thumbnail}\n`;
-                movieDetails += `╰🔗 Link       : ${movie.link}\n\n`;
+                movieDetails += `🎬 Title: ${movie.movieName}\n`;
+                movieDetails += `📅 Year: ${movie.year}\n`;
+                movieDetails += `⭐ imdbRating: ${movie.imdbRating}\n`;
+                movieDetails += `🔗 Link:${movie.link}\n╰═══════════════\n`;
             });
 
             // Send the movie details in one message
