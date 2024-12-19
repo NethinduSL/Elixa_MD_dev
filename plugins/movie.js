@@ -96,7 +96,7 @@ cmd({
 });
 
 
-
+//https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/movie.png
 
 cmd({
     pattern: "dl",
