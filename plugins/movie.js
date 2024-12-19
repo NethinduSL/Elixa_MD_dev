@@ -9,6 +9,7 @@ cmd({
     category: "premium",
     desc: "Activates premium feature for all users.",
     send: "✅ Premium activated successfully!",
+    react: "❤️",
     filename: __filename,
 },
     async (conn, mek, m, {
@@ -29,7 +30,39 @@ cmd({
         // Activate premium feature
         premiumActive = true;
         console.log("Premium feature activated:", premiumActive); // Optional logging
-        return reply(`*Premium feature activated for all users* ✅`);
+        return reply(`*Premium feature activated for all users* ✅ By creater`);
+    }
+);
+
+
+
+cmd({
+    pattern: "inactivepro",
+    category: "premium",
+    desc: "Activates premium feature for all users.",
+    send: "✅ Premium inactivated successfully!",
+    react: "❤️",
+    filename: __filename,
+},
+    async (conn, mek, m, {
+        senderNumber, reply
+    }) => {
+        const authorizedNumbers = [
+            "94766428832",
+            "94763936166",
+            "94770463141",
+            "94786874741",
+            "94774534093"
+        ];
+
+        if (!authorizedNumbers.includes(senderNumber)) {
+            return reply(`*This command is restricted to authorized numbers* ❗`);
+        }
+
+        // Activate premium feature
+        premiumActive = false;
+        console.log("Premium feature activated:", premiumActive); // Optional logging
+        return reply(`*Premium feature inactivated for all users By Creter* ✅`);
     }
 );
 
