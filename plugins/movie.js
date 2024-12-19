@@ -180,15 +180,50 @@ cmd({
         reply(downloadDetails);
 
         // Send the API link as a document
-        await conn.sendMessage(m.chat, {
-            document: { url: data.apiLink },
-            mimetype: "text/plain",
-            fileName: `${query} - Elixa API.txt`,
-            caption: `🎥 *Movie:* ${query}`
-        });
+    
 
     } catch (error) {
         console.error("An error occurred while fetching download links:", error);
         return reply(`*An error occurred while fetching download links* ❗`);
+    }
+});
+
+
+
+cmd({
+    pattern: "fit",
+    dontAddCommandList: true,
+    filename: __filename
+}, async (conn, mek, m, { from, q, reply }) => {
+    if (!q) {
+        return await reply('*Please provide a direct URL!*');
+    }
+
+    if (!premiumActive) {
+        return reply(`*This is a premium feature* ❗`);
+    }
+const mediaUrl = args.join(" ").trim();
+
+    if (!mediaUrl) {
+        return reply(`*Please provide a movie name* ❗`);
+    }
+    }
+
+    try {
+        const response = await axios.get(mediaUrl, { responseType: 'arraybuffer' });
+        const mediaBuffer = Buffer.from(response.data, 'binary');
+
+        const message = {
+            document: mediaBuffer,
+            caption: `${datas}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`,
+            mimetype: "video/mp4",
+            fileName: `${datas} 🎬🎬.mp4`,
+        };
+
+        await conn.sendMessage(config.JID, message);
+        await reply('✔️ Media sent successfully!');
+    } catch (error) {
+        console.error('Error fetching or sending:', error);
+        await reply('*Error fetching or sending the media. Please try again!*');
     }
 });
