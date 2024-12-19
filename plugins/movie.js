@@ -33,17 +33,19 @@ cmd({
                 return reply(`*Movie not found* ❗`);
             }
 
-            // Formatting movie data
+            // Initialize a string to hold the formatted movie details
             let movieDetails = "╭❰𝗘ꟾ𝖎✘𝗮 𝗠𝗼𝘃𝗶𝗲 𝗶𝗻𝗳𝗼❱❱\n┃\n╰\n";
-            const movie = response.data.data[0];
 
-            movieDetails += `╰🎬 Title      : ${movie.movieName}\n\n`;
-            movieDetails += `╰📅 Year       : ${movie.year}\n\n`;
-            movieDetails += `╰⭐ imdbRating : ${movie.imdbRating}\n\n`;
-            movieDetails += `╰📷 Thumbnail  : ${movie.thumbnail}\n\n`;
-            movieDetails += `╰🔗 Link       : ${movie.link}\n\n`;
+            // Loop through each movie in the response and append its details
+            response.data.data.forEach(movie => {
+                movieDetails += `╰🎬 Title      : ${movie.movieName}\n`;
+                movieDetails += `╰📅 Year       : ${movie.year}\n`;
+                movieDetails += `╰⭐ imdbRating : ${movie.imdbRating}\n`;
+                movieDetails += `╰📷 Thumbnail  : ${movie.thumbnail}\n`;
+                movieDetails += `╰🔗 Link       : ${movie.link}\n\n`;
+            });
 
-            // Send the movie details
+            // Send the movie details in one message
             await reply(movieDetails);
         } catch (error) {
             console.error("An error occurred while fetching movie data:", error);
@@ -51,4 +53,3 @@ cmd({
         }
     }
 );
-
