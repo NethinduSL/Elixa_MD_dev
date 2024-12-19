@@ -3,6 +3,8 @@ const { cmd } = require('../command');
 
 // Global premium feature flag
 let premiumActive = false;
+let down = false;
+
 const imageUrl = "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/movie.png";
 
 // Activate premium feature
