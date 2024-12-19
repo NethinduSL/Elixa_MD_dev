@@ -8,6 +8,7 @@ const imageUrl = "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/mai
 cmd({
     pattern: "activepro",
     category: "premium",
+    react:"💖",
     desc: "Activates premium feature for all users.",
     send: "✅ Premium activated successfully!",
     filename: __filename,
@@ -60,6 +61,7 @@ cmd({
     category: "search",
     desc: "Sends image of asked Movie/Series.",
     use: '<movie_name>',
+    react:"😎",
     send: "🎥 Fetching movie details...",
     filename: __filename,
 }, async (conn, mek, m, { args, reply }) => {
@@ -86,21 +88,21 @@ cmd({
             movieDetails += `📅 Year: ${movie.year}\n`;
             movieDetails += `⭐ IMDB Rating: ${movie.imdbRating}\n`;
             movieDetails += `🔗 Link: ${movie.link}\n╰═══════════════\n`;
+        }
 
-    });
-            const chatId = m.chat || mek.key.remoteJid;
+        const chatId = m.chat || mek.key.remoteJid;
 
-            // Send movie details with the image
-            await conn.sendMessage(chatId, {
-                image: { url: imageUrl },
-                caption: movieDetails
-            });
-        
+        // Send movie details with the image
+        return await conn.sendMessage(chatId, {
+            image: { url: imageUrl },
+            caption: movieDetails,
+        });
     } catch (error) {
         console.error("An error occurred while fetching movie data:", error);
         return reply(`*An error occurred while fetching movie data* ❗`);
     }
 });
+
 
 
 //https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/movie.png
