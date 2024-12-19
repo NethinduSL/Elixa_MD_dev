@@ -21,9 +21,9 @@ cmd({
         if (senderNumber !== "94766428832" && senderNumber !== "94763936166") {
             return reply(`*This command is restricted to authorized numbers* ❗`);
         }
-
+return reply(`*Premium feature activated for all users* ✅`);
         premiumActive = true;
-        return reply(`*Premium feature activated for all users* ✅`);
+        
     }
 );
 
