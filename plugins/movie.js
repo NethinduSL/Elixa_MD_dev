@@ -137,8 +137,11 @@ cmd({
             downloadDetails += `📦 Size: ${link.size}\n`;
             downloadDetails += `🔗 Link: ${link.link}\n╰═══════════════\n`;
         });
-
-        return reply(downloadDetails);
+return await conn.sendMessage(chatId, {
+            image: { url: imageUrl },
+            caption: downloadDetails,
+        });
+        
     } catch (error) {
         console.error("An error occurred while fetching download links:", error);
         return reply(`*An error occurred while fetching download links* ❗`);
@@ -212,6 +215,7 @@ const mediaUrl = args.join(" ").trim();
     
 
     try {
+        await reply('✔️ Media Downloading started!');
         const response = await axios.get(mediaUrl, { responseType: 'arraybuffer' });
         const mediaBuffer = Buffer.from(response.data, 'binary');
 
