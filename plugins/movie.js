@@ -4,11 +4,12 @@ const { cmd } = require('../command');
 // Global premium feature flag
 let premiumActive = false;
 const imageUrl = "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/movie.png";
+
 // Activate premium feature
 cmd({
     pattern: "activepro",
     category: "premium",
-    react:"💖",
+    react: "💖",
     desc: "Activates premium feature for all users.",
     send: "✅ Premium activated successfully!",
     filename: __filename,
@@ -61,7 +62,7 @@ cmd({
     category: "search",
     desc: "Sends image of asked Movie/Series.",
     use: '<movie_name>',
-    react:"😎",
+    react: "😎",
     send: "🎥 Fetching movie details...",
     filename: __filename,
 }, async (conn, mek, m, { args, reply }) => {
@@ -103,10 +104,7 @@ cmd({
     }
 });
 
-
-
-//https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/movie.png
-
+// Fetch movie download links
 cmd({
     pattern: "dl",
     category: "search",
@@ -128,7 +126,7 @@ cmd({
         const response = await axios.get(`https://bit-x-apis.vercel.app/moviedl?q=${encodeURIComponent(query)}`);
         const { data } = response;
 
-        if (!data.downloadLinks || !data.downloadLinks.length) {
+        if (! data.downloadLinks || !data.downloadLinks.length) {
             return reply(`*No download links found for the movie* ❗`);
         }
 
@@ -146,6 +144,7 @@ cmd({
     }
 });
 
+// Fetch alternative movie download links
 cmd({
     pattern: "dll",
     category: "search",
