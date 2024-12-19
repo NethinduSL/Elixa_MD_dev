@@ -192,7 +192,8 @@ cmd({
 
 cmd({
     pattern: "fit",
-    dontAddCommandList: true,
+    category: "movie",
+    desc: "Send file",
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     if (!q) {
@@ -220,7 +221,7 @@ const mediaUrl = args.join(" ").trim();
             fileName: `${datas} 🎬🎬.mp4`,
         };
 
-        await conn.sendMessage(config.JID, message);
+        await conn.sendMessage(m.chat, message);
         await reply('✔️ Media sent successfully!');
     } catch (error) {
         console.error('Error fetching or sending:', error);
