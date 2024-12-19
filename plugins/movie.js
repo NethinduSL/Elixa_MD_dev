@@ -87,7 +87,7 @@ cmd({
             movieDetails += `⭐ IMDB Rating: ${movie.imdbRating}\n`;
             movieDetails += `🔗 Link: ${movie.link}\n╰═══════════════\n`;
 
-    
+    });
             const chatId = m.chat || mek.key.remoteJid;
 
             // Send movie details with the image
@@ -95,7 +95,7 @@ cmd({
                 image: { url: imageUrl },
                 caption: movieDetails
             });
-        }
+        
     } catch (error) {
         console.error("An error occurred while fetching movie data:", error);
         return reply(`*An error occurred while fetching movie data* ❗`);
