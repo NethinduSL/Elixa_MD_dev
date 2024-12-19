@@ -3,7 +3,7 @@ const { cmd } = require('../command');
 const { fetchJson } = require('../lib/functions');
 
 cmd({
-    pattern: "movie",
+    pattern: "imdb",
     category: "search",
     desc: "Sends image of asked Movie/Series.",
     use: '<movie_name>',
