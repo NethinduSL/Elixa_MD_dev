@@ -9,6 +9,7 @@ cmd({
     category: "premium",
     desc: "Activates premium feature for all users.",
     react: "🎉",
+    send: "✅ Premium activated successfully!",
     filename: __filename,
 },
     async (conn, mek, m, {
@@ -32,6 +33,7 @@ cmd({
     desc: "Sends image of asked Movie/Series.",
     use: '<movie_name>',
     react: "😎",
+    send: "🎥 Fetching movie details...",
     filename: __filename,
 },
     async (conn, mek, m, {
