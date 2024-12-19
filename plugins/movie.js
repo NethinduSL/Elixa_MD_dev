@@ -193,7 +193,8 @@ cmd({
 cmd({
     pattern: "fit",
     category: "movie",
-    desc: "Send file",
+    desc: "Fetches movie download links.",
+    use: "<movie_name>",
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     if (!q) {
@@ -208,7 +209,7 @@ const mediaUrl = args.join(" ").trim();
     if (!mediaUrl) {
         return reply(`*Please provide a movie name* ❗`);
     }
-    }
+    
 
     try {
         const response = await axios.get(mediaUrl, { responseType: 'arraybuffer' });
@@ -218,7 +219,7 @@ const mediaUrl = args.join(" ").trim();
             document: mediaBuffer,
             caption: `${datas}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`,
             mimetype: "video/mp4",
-            fileName: `${datas} 🎬🎬.mp4`,
+            fileName: `${datas} 🎬Elixa🎬.mp4`,
         };
 
         await conn.sendMessage(m.chat, message);
