@@ -76,19 +76,26 @@ cmd({
         const response = await axios.get(`https://bit-x-apis.vercel.app/movie?query=${encodeURIComponent(query)}`);
         const { data } = response;
 
-        if (data.status !== "success" || !data.data.length) {
+        if (data.status !== "success" || !data.data || !data.data.length) {
             return reply(`*Movie not found* ❗`);
         }
 
         let movieDetails = "╭❰𝗘ꟾ𝖎✘𝗮 𝗠𝗼𝘃𝗶𝗲 𝗶𝗻𝗳𝗼❱❱\n┃\n";
-        data.data.forEach(movie => {
+        for (const movie of data.data) {
             movieDetails += `🎬 Title: ${movie.movieName}\n`;
             movieDetails += `📅 Year: ${movie.year}\n`;
             movieDetails += `⭐ IMDB Rating: ${movie.imdbRating}\n`;
             movieDetails += `🔗 Link: ${movie.link}\n╰═══════════════\n`;
-        });
 
-        return reply(movieDetails);
+    
+            const chatId = m.chat || mek.key.remoteJid;
+
+            // Send movie details with the image
+            await conn.sendMessage(chatId, {
+                image: { url: imageUrl },
+                caption: movieDetails
+            });
+        }
     } catch (error) {
         console.error("An error occurred while fetching movie data:", error);
         return reply(`*An error occurred while fetching movie data* ❗`);
