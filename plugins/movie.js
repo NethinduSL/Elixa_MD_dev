@@ -2,7 +2,7 @@ const axios = require('axios');
 const { cmd } = require('../command');
 const { fetchJson } = require('../lib/functions');
 
-let premiumActive = false;
+let premiumActive = true;
 
 cmd({
     pattern: "activepro",
