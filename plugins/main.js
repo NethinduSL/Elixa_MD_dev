@@ -79,10 +79,11 @@ cmd({
     react:"📘",
     filename: __filename,
 }, 
-async (Void, citel) => {
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+try {
     // Get the JID (Jabber ID) of the chat
     const jid = citel.chat;
 
     // Send the JID as a message
-    return await Void.sendMessage(citel.chat, { text: '📍 *Chat JID: ' + jid + '*'});
+    await conn.sendMessage(m.chat, { text: '📍 *Chat JID: ' + jid + '*'}); }
 });
