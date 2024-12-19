@@ -72,3 +72,17 @@ cmd({
 //╭──────────────────────fact──────────────────────╮//
 
 
+cmd({
+    pattern: "jid",
+    desc: "Get the JID of the current chat",
+    category: "main",
+    react:"📘",
+    filename: __filename,
+}, 
+async (Void, citel) => {
+    // Get the JID (Jabber ID) of the chat
+    const jid = citel.chat;
+
+    // Send the JID as a message
+    return await Void.sendMessage(citel.chat, { text: '📍 *Chat JID: ' + jid + '*'});
+});
