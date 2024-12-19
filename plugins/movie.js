@@ -137,3 +137,49 @@ cmd({
     }
 });
 
+cmd({
+    pattern: "dll",
+    category: "search",
+    desc: "Fetches movie download links.",
+    use: "<movie_name>",
+    send: "🎥 Fetching download links...",
+    filename: __filename,
+}, async (conn, mek, m, { args, reply }) => {
+    if (!premiumActive) {
+        return reply(`*This is a premium feature* ❗`);
+    }
+
+    const query = args.join(" ").trim();
+    if (!query) {
+        return reply(`*Please provide a movie name* ❗`);
+    }
+
+    try {
+        const response = await axios.get(`https://bit-x-apis.vercel.app/moviedll?q=${encodeURIComponent(query)}`);
+        const { data } = response;
+
+        if (!data.originalLink || !data.apiLink) {
+            return reply(`*No download links found for the movie* ❗`);
+        }
+
+        // Prepare the download details message
+        const downloadDetails = `╭❰𝗘ꟾ𝖎✘𝗮 𝗠𝗼𝘃𝗶𝗲 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱❱❱\n┃\n` +
+            `🔗 *Original Link:* ${data.originalLink}\n` +
+            `🔗 *API Link:* ${data.apiLink}\n╰═══════════════`;
+
+        // Send the download details as a reply
+        reply(downloadDetails);
+
+        // Send the API link as a document
+        await conn.sendMessage(m.chat, {
+            document: { url: data.apiLink },
+            mimetype: "text/plain",
+            fileName: `${query} - Elixa API.txt`,
+            caption: `🎥 *Movie:* ${query}`
+        });
+
+    } catch (error) {
+        console.error("An error occurred while fetching download links:", error);
+        return reply(`*An error occurred while fetching download links* ❗`);
+    }
+});
