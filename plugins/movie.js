@@ -58,7 +58,7 @@ cmd({
 // Fetch movie details
 cmd({
     pattern: "movie",
-    category: "search",
+    category: "movie",
     desc: "Sends image of asked Movie/Series.",
     use: '<movie_name>',
     react: "😎",
@@ -106,7 +106,7 @@ cmd({
 // Fetch movie download links
 cmd({
     pattern: "dl",
-    category: "search",
+    category: "movie",
     desc: "Fetches movie download links.",
     use: "<movie_name>",
     send: "🎥 Fetching download links...",
@@ -146,7 +146,7 @@ cmd({
 // Fetch alternative movie download links
 cmd({
     pattern: "dll",
-    category: "search",
+    category: "movie",
     desc: "Fetches movie download links.",
     use: "<movie_name>",
     send: "🎥 Fetching download links...",
