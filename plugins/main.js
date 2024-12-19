@@ -1,18 +1,17 @@
 const config = require('../config');
 const { cmd, commands } = require('../command');
 const { runtime } = require('../lib/functions');
-const os = require('os');  // Fixed the typo 'requir' to 'require'
+const os = require('os');
 const axios = require('axios');
 
 cmd({
     pattern: "system",
     desc: "About Elixa",
-    alias: ["status", "elixas", "botinfo","info"],  // Fixed 'alial' to 'alias' and added a missing double quote
+    alias: ["status", "elixas", "botinfo", "info"],
     category: "main",
     filename: __filename
 }, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-
         let status = `
 𝗥𝘂𝗻𝘁𝗶𝗺𝗲 :  ${runtime(process.uptime())}
 𝗥𝗮𝗺 : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(os.totalmem() / 1024 / 1024)}MB  
@@ -22,17 +21,14 @@ cmd({
 > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
 `;
 
-        reply(status);  // Removed the single quotes around the status variable
-
+        reply(status);
     } catch (e) {
         console.log(e);
-        reply(`${e}`);
+        reply(`Error: ${e.message}`);
     }
 });
 
-
 //╭──────────────────────fact──────────────────────╮//
-
 
 cmd({
     pattern: "repo",
@@ -61,29 +57,29 @@ cmd({
         elixa += `🔗 URL: ${elixs.data.html_url}\n`;
 
         await conn.sendMessage(m.chat, { text: elixa }, { quoted: m });
-
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-
 //╭──────────────────────fact──────────────────────╮//
-
 
 cmd({
     pattern: "jid",
     desc: "Get the JID of the current chat",
     category: "main",
-    react:"📘",
+    react: "📘",
     filename: __filename,
-}, 
-async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
-try {
-    // Get the JID (Jabber ID) of the chat
-    const jid = citel.chat;
+}, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        // Get the JID (Jabber ID) of the chat
+        const jid = m.chat;
 
-    // Send the JID as a message
-    await conn.sendMessage(m.chat, { text: '📍 *Chat JID: ' + jid + '*'}); }
+        // Send the JID as a message
+        await conn.sendMessage(m.chat, { text: '📍 *Chat JID: ' + jid + '*' });
+    } catch (e) {
+        console.log(e);
+        reply(`Error: ${e.message}`);
+    }
 });
