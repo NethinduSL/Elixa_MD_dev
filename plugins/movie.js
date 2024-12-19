@@ -2,30 +2,38 @@ const axios = require('axios');
 const { cmd } = require('../command');
 const { fetchJson } = require('../lib/functions');
 
-let premiumActive = true;
+let premiumActive = false;
 
 cmd({
     pattern: "activepro",
     category: "premium",
     desc: "Activates premium feature for all users.",
-    react: "🎉",
     send: "✅ Premium activated successfully!",
     filename: __filename,
 },
     async (conn, mek, m, {
-        from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, 
-        botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, 
-        participants, groupAdmins, isBotAdmins, isAdmins, reply
+        senderNumber, reply
     }) => {
-        
-        if (senderNumber !== "94766428832" && senderNumber !== "94763936166") {
+        const authorizedNumbers = [
+            "94766428832",
+            "94763936166",
+            "94770463141",
+            "94786874741",
+            "94774534093"
+        ];
+
+        if (!authorizedNumbers.includes(senderNumber)) {
             return reply(`*This command is restricted to authorized numbers* ❗`);
         }
-return reply(`*Premium feature activated for all users* ✅`);
+
+        // Activate premium feature
         premiumActive = true;
-        
+        console.log("Premium feature activated:", premiumActive); // Optional logging
+        return reply(`*Premium feature activated for all users* ✅`);
     }
 );
+
+
 
 cmd({
     pattern: "movie",
