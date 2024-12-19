@@ -9,7 +9,6 @@ const imageUrl = "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/mai
 cmd({
     pattern: "activepro",
     category: "premium",
-    react: "💖",
     desc: "Activates premium feature for all users.",
     send: "✅ Premium activated successfully!",
     filename: __filename,
