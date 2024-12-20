@@ -9,6 +9,7 @@ cmd(
         pattern: "alive",
         desc: "Check bot's response time and uptime information.",
         category: "main",
+        react: "🖥️",
         filename: __filename
     },
     async (
