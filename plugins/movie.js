@@ -2,7 +2,7 @@ const axios = require('axios');
 const { cmd } = require('../command');
 
 // Global premium feature flag
-let premiumActive = false;
+let premiumActive = true;
 let down = false;
 
 const imageUrl = "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/movie.png";
