@@ -207,6 +207,9 @@ cmd({
     if (!premiumActive) {
         return reply(`*This is a premium feature* ❗`);
     }
+    if (!down) {
+        return reply(`*This is off low memory* ❗`);
+    }
 const mediaUrl = args.join(" ").trim();
 
     if (!mediaUrl) {
