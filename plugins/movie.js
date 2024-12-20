@@ -59,7 +59,7 @@ cmd({
 
 // Fetch movie details
 cmd({
-    pattern: "moviel",
+    pattern: "movies",
     category: "movie",
     desc: "Sends image of asked Movie/Series.",
     use: '<movie_name>',
