@@ -12,7 +12,6 @@ cmd({
     pattern: "activepro",
     category: "premium",
     desc: "Activates premium feature for all users.",
-    react:"❤️",
     filename: __filename,
 }, async (conn, mek, m, { senderNumber, reply }) => {
     const authorizedNumbers = [
@@ -37,7 +36,7 @@ cmd({
     pattern: "inactivepro",
     category: "premium",
     desc: "Deactivates premium feature for all users.",
-    react:"✅",
+    
     filename: __filename,
 }, async (conn, mek, m, { senderNumber, reply }) => {
     const authorizedNumbers = [
@@ -88,7 +87,7 @@ cmd({
             movieDetails += `🎬 Title: ${movie.movieName}\n`;
             movieDetails += `📅 Year: ${movie.year}\n`;
             movieDetails += `⭐ IMDB Rating: ${movie.imdbRating}\n`;
-            movieDetails += `🔗 Link: ${movie.link}\n╰═══════════════\n`;
+            movieDetails += `🔗 Link: ${movie.link}\n╰═══════════════\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺\n`;
         }
 
         const chatId = m.chat || mek.key.remoteJid;
@@ -134,7 +133,7 @@ cmd({
         data.downloadLinks.forEach(link => {
             downloadDetails += `📽️ Quality: ${link.quality}\n`;
             downloadDetails += `📦 Size: ${link.size}\n`;
-            downloadDetails += `🔗 Link: ${link.link}\n╰═══════════════\n`;
+            downloadDetails += `🔗 Link: ${link.link}\n╰═══════════════\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺\n`;
         });
         const chatId = m.chat || mek.key.remoteJid;
 return await conn.sendMessage(chatId, {
@@ -177,7 +176,7 @@ cmd({
         // Prepare the download details message
         const downloadDetails = `╭❰𝗘ꟾ𝖎✘𝗮 𝗠𝗼𝘃𝗶𝗲 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱❱❱\n┃\n` +
             `🔗 *Original Link:* ${data.originalLink}\n` +
-            `🔗 *API Link:* ${data.apiLink}\n╰═══════════════`;
+            `🔗 *API Link:* ${data.apiLink}\n╰═══════════════\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`;
 
         // Send the download details as a reply
         reply(downloadDetails);
