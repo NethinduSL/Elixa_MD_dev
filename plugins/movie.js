@@ -199,7 +199,7 @@ cmd({
     desc: "Fetches movie download links.",
     use: "<movie_directlink>",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+}, async (conn, mek, m, { from, q, reply ,args}) => {
     if (!q) {
         return await reply('*Please provide a direct URL!*');
     }
