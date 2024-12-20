@@ -137,6 +137,7 @@ cmd({
             downloadDetails += `📦 Size: ${link.size}\n`;
             downloadDetails += `🔗 Link: ${link.link}\n╰═══════════════\n`;
         });
+        const chatId = m.chat || mek.key.remoteJid;
 return await conn.sendMessage(chatId, {
             image: { url: imageUrl },
             caption: downloadDetails,
