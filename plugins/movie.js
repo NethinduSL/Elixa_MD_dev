@@ -1,4 +1,4 @@
-/*const axios = require('axios');
+const axios = require('axios');
 const { cmd } = require('../command');
 
 // Global premium feature flag
