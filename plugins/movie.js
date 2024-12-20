@@ -63,7 +63,7 @@ cmd({
     category: "movie",
     desc: "Sends image of asked Movie/Series.",
     use: '<movie_name>',
-    react: "😎",
+    react: "🎬",
     filename: __filename,
 }, async (conn, mek, m, { args, reply }) => {
     if (!premiumActive) {
