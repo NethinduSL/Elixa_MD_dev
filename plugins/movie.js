@@ -12,7 +12,7 @@ cmd({
     pattern: "activepro",
     category: "premium",
     desc: "Activates premium feature for all users.",
-    send: "✅ Premium activated successfully!",
+    react:"❤️",
     filename: __filename,
 }, async (conn, mek, m, { senderNumber, reply }) => {
     const authorizedNumbers = [
@@ -37,7 +37,7 @@ cmd({
     pattern: "inactivepro",
     category: "premium",
     desc: "Deactivates premium feature for all users.",
-    send: "✅ Premium deactivated successfully!",
+    react:"✅",
     filename: __filename,
 }, async (conn, mek, m, { senderNumber, reply }) => {
     const authorizedNumbers = [
@@ -59,12 +59,11 @@ cmd({
 
 // Fetch movie details
 cmd({
-    pattern: "movie",
+    pattern: "moviel",
     category: "movie",
     desc: "Sends image of asked Movie/Series.",
     use: '<movie_name>',
     react: "😎",
-    send: "🎥 Fetching movie details...",
     filename: __filename,
 }, async (conn, mek, m, { args, reply }) => {
     if (!premiumActive) {
@@ -110,7 +109,7 @@ cmd({
     pattern: "dl",
     category: "movie",
     desc: "Fetches movie download links.",
-    use: "<movie_name>",
+    use: "<movie_link>",
     send: "🎥 Fetching download links...",
     filename: __filename,
 }, async (conn, mek, m, { args, reply }) => {
@@ -154,7 +153,7 @@ cmd({
     pattern: "dll",
     category: "movie",
     desc: "Fetches movie download links.",
-    use: "<movie_name>",
+    use: "<movie_qulityname>",
     send: "🎥 Fetching download links...",
     filename: __filename,
 }, async (conn, mek, m, { args, reply }) => {
@@ -197,8 +196,9 @@ cmd({
 cmd({
     pattern: "fit",
     category: "movie",
+    react:"✅",
     desc: "Fetches movie download links.",
-    use: "<movie_name>",
+    use: "<movie_directlink>",
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     if (!q) {
