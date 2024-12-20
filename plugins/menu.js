@@ -1,23 +1,18 @@
 const config = require('../config');
 const { cmd, commands } = require('../command');
 
-
-
 cmd({
     pattern: "movie",
     desc: "Sends a readmore.",
     category: "pro",
-        react :"🎬│",
+    react: "🎬",
     filename: __filename,
-},
-async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+}, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
 
     // Check if the user provided additional text
-    
+
     // Formatting the response with a "read more" style break
-    let movie=`
-
-
+    let movie = `
 ╭ ❰  𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗢𝗩𝗜𝗘 ᴾᴿᴼ  ❱❱
 ┃    
 ╭𝗛𝗲𝗹𝗹𝗼 𝙴 𝙱𝙾𝚇 𝚂𝙻 𝗘ꟾ𝖎✘𝗮👋
@@ -52,18 +47,13 @@ api url එකක් නෑ කියන්නෙ telegram විතරයි mo
 
 +94766428832 massage එකක් දාන්න 
 > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
-        
     `;
-    
-   
-await conn.sendMessage(from, {image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png" },caption: movie }, { quoted: mek });
 
-
-
+    await conn.sendMessage(from, {
+        image: { url: "https://raw.githubusercontent.com/Eboxsl/ELAUTO/refs/heads/main/Elixa/menu.png" },
+        caption: movie
+    }, { quoted: mek });
 });
-
-
-
 
 
 
