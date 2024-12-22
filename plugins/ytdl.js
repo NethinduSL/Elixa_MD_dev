@@ -51,14 +51,14 @@ async (conn, mek, m, {
         await conn.sendMessage(from, {
             audio: { url: download_url },
             mimetype: "audio/mpeg",
-            fileName: `${title}.mp3`
+            fileName: `${data2.title}.mp3`
         }, { quoted: mek });
 
         // Send audio as a downloadable document
         await conn.sendMessage(from, {
             document: { url: download_url },
             mimetype: "audio/mpeg",
-            fileName: `${title}.mp3`,
+            fileName: `${data2.title}.mp3`,
             caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
         }, { quoted: mek });
 
@@ -119,14 +119,14 @@ async (conn, mek, m, {
         await conn.sendMessage(from, {
             audio: { url: download_url },
             mimetype: "video/mp4",
-            fileName: `${title}.mp4`
+            fileName: `${data2.title}.mp4`
         }, { quoted: mek });
 
         // Send audio as a downloadable document
         await conn.sendMessage(from, {
             document: { url: download_url },
             mimetype: "video/mp4",
-            fileName: `${title}.mp4`,
+            fileName: `${data2.title}.mp4`,
             caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
         }, { quoted: mek });
 
