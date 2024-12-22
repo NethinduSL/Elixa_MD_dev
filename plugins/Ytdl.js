@@ -39,13 +39,13 @@ async (conn, mek, m, {
         // Use your API to get the MP3 download URL
         const apiUrl = `https://api.giftedtech.my.id/api/download/ytmp3?apikey=gifted&url=${url}`;
         const response = await axios.get(apiUrl);
-        const data = response.data;
+        const data2 = response.data;
 
         if (!data.success) {
             return reply("Failed to download the song 🙃");
         }
 
-        const { download_url } = data.result;
+        const { download_url } = data2.result;
 
         // Send audio as a playable file
         await conn.sendMessage(from, {
