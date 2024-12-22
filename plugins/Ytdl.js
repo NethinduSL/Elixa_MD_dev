@@ -41,7 +41,7 @@ async (conn, mek, m, {
         const response = await axios.get(apiUrl);
         const data2 = response.data;
 
-        if (!data.success) {
+        if (!data2.success) {
             return reply("Failed to download the song 🙃");
         }
 
