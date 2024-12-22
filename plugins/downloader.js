@@ -51,7 +51,7 @@ async (conn, mek, m, {
 
     } catch (e) {
         console.log(e);
-        reply(`Error: ${e}`);
+        reply(`If this is not work use song2\nමේක වැඩ නැත්නම් song2 වැඩ : ${e}`);
     }
 });
 
@@ -98,7 +98,7 @@ async (conn, mek, m, {
 
     } catch (e) {
         console.log(e);
-        reply(`Error: ${e}`);
+        reply(`If this is not work use video2\nමේක වැඩ නැත්නම් video2 වැඩ ${e}`);
     }
 });
 
