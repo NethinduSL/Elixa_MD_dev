@@ -61,28 +61,30 @@ cmd({
     } catch (primaryError) {
         // Fallback: Alternative API only if the first fails
         try {
-            const apiUrl = `https://api.giftedtech.my.id/api/download/ytmp3?apikey=gifted&url=${q}`;
-            const response = await axios.get(apiUrl);
-            const { result } = response.data;
+           const apiUrl = `https://api.giftedtech.my.id/api/download/ytmp3?apikey=gifted&url=${url}`;
+        const response = await axios.get(apiUrl);
+        const data2 = response.data;
 
-            
+        if (!data2.success || !data2.result) {
+            return reply("Failed to download the song 🙃");
+        }
 
-            const { download_url, title } = result;
+        const { download_url, title } = data2.result;
 
-            // Send audio as a playable file
-            await conn.sendMessage(from, {
-                audio: { url: download_url },
-                mimetype: "audio/mpeg",
-                fileName: `${title}.mp3`
-            }, { quoted: mek });
+        // Send audio as a playable file
+        await conn.sendMessage(from, {
+            audio: { url: download_url },
+            mimetype: "audio/mpeg",
+            fileName: `${title}.mp3`
+        }, { quoted: mek });
 
-            // Send audio as a downloadable document
-            return conn.sendMessage(from, {
-                document: { url: download_url },
-                mimetype: "audio/mpeg",
-                fileName: `${title}.mp3`,
-                caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
-            }, { quoted: mek });
+        // Send audio as a downloadable document
+        await conn.sendMessage(from, {
+            document: { url: download_url },
+            mimetype: "audio/mpeg",
+            fileName: `${title}.mp3`,
+            caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
+        }, { quoted: mek });
 
         } catch (fallbackError) {
             console.error("Fallback method failed:", fallbackError.message);
