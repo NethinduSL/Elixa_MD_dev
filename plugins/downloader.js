@@ -9,8 +9,6 @@ const { Buffer } = require('buffer');
 
 
 
-
-
 cmd({
     pattern: "song",
     desc: "Download Songs By Elixa.",
@@ -23,13 +21,15 @@ cmd({
     try {
         if (!q) return reply("Please provide a valid song name or URL 🙃");
 
+        let videoUrl;
+
         // First Attempt: Search and download using yt-search
         try {
             const search = await yts(q);
             if (!search.videos.length) throw new Error("No results found");
 
             const data = search.videos[0];
-            const url = data.url;
+            videoUrl = data.url; // Store the URL for fallback
 
             const desc = `
 ╭❰𝗘ꟾ𝖎✘𝗮 𝗠𝗗 𝗦𝗼𝗻𝗴 🎵 ❱❱
@@ -47,7 +47,7 @@ cmd({
 
             await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
-            const down = await fg.yta(url);
+            const down = await fg.yta(videoUrl);
             const downloadUrl = down.dl_url;
 
             // Send audio
@@ -55,41 +55,41 @@ cmd({
             return conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mp3", fileName: `${data.title}.mp3` }, { quoted: mek });
         } catch (err) {
             console.warn("Primary method failed:", err.message);
-            throw new Error("Primary method failed, trying alternative API...");
+            if (!videoUrl) throw new Error("No video URL found for fallback");
         }
 
-    } catch (primaryError) {
         // Fallback: Alternative API only if the first fails
         try {
-           const apiUrl = `https://api.giftedtech.my.id/api/download/ytmp3?apikey=gifted&url=${url}`;
-        const response = await axios.get(apiUrl);
-        const data2 = response.data;
+            const apiUrl = `https://api.giftedtech.my.id/api/download/ytmp3?apikey=gifted&url=${videoUrl}`;
+            const response = await axios.get(apiUrl);
+            const { result } = response.data;
 
-        if (!data2.success || !data2.result) {
-            return reply("Failed to download the song 🙃");
-        }
+            if (!result || !result.download_url) throw new Error("No results from API");
 
-        const { download_url, title } = data2.result;
+            const { download_url, title } = result;
 
-        // Send audio as a playable file
-        await conn.sendMessage(from, {
-            audio: { url: download_url },
-            mimetype: "audio/mpeg",
-            fileName: `${title}.mp3`
-        }, { quoted: mek });
+            // Send audio as a playable file
+            await conn.sendMessage(from, {
+                audio: { url: download_url },
+                mimetype: "audio/mpeg",
+                fileName: `${title}.mp3`
+            }, { quoted: mek });
 
-        // Send audio as a downloadable document
-        await conn.sendMessage(from, {
-            document: { url: download_url },
-            mimetype: "audio/mpeg",
-            fileName: `${title}.mp3`,
-            caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
-        }, { quoted: mek });
+            // Send audio as a downloadable document
+            return conn.sendMessage(from, {
+                document: { url: download_url },
+                mimetype: "audio/mpeg",
+                fileName: `${title}.mp3`,
+                caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
+            }, { quoted: mek });
 
         } catch (fallbackError) {
             console.error("Fallback method failed:", fallbackError.message);
             return reply(`Error: Both methods failed. Please try again later 🙃`);
         }
+    } catch (finalError) {
+        console.error("Unexpected error:", finalError.message);
+        reply(`Error: ${finalError.message || "Something went wrong 🙃"}`);
     }
 });
 
