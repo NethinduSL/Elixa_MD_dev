@@ -2,7 +2,10 @@ const config = require('../config');
 const { cmd } = require('../command');
 const yts = require('yt-search');
 const axios = require('axios');
+const fg = require('api-dylux');
+const { fetchJson } = require('../lib/functions');
 
+const { Buffer } = require('buffer');
 // Song download command
 cmd({
     pattern: "song2",
