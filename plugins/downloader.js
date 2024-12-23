@@ -229,30 +229,4 @@ const downloadMessage = `ᴅᴏᴡɴʟᴏᴀᴅ ꜱᴘᴇᴇᴅ ɪꜱ ᴅᴇᴘ�
 
 
 
-cmd({
-    pattern: "ss",
-    category: "download",
-    react: "🔥",
-    filename: __filename,
-    desc: "Sends screenshot of web site"
-},
-async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
-    try {
-        if (args.length === 0) {
-            return reply("Please provide the text to generate the QR code.");
-        }
-
-        const text = args.join(" ");
-        const qrcode = `https://api.microlink.io/?url=${encodeURIComponent(text)}&screenshot=true&embed=screenshot.url`;
-        const buffer = await getBuffer(qrcode);
-//https://api.microlink.io/?url=https%3A%2F%2FWww.google.com&screenshot=true&embed=screenshot.url
-
-        
-        await conn.sendMessage(from, { image: buffer, caption: `Here is your code img for: ${text}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺` }, { quoted: mek });
-    } catch (e) {
-        console.error(e);
-        mek.reply("An error occurred while generating the QR code. Please try again.");
-    }
-});
-
 
