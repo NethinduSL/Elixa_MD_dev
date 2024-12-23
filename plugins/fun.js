@@ -119,17 +119,18 @@ cmd({
 
 cmd({
     pattern: "teddyy",    
-    catergory: "fun",    
+    category: "fun",    
     dear: "cute teddy",   
     filename: __filename,
-},async(Void,citel ,text) => {
-      let teddy = ['❤', '💕', '😻', '🧡', '💛', '💚', '💙', '💜', '🖤', '❣', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '♥️', '💌', '🙂', '🤗', '😌', '😉', '🤗', '😊', '🎊', '🎉', '🎁', '🎈']
-      const { key } = await Void.sendMessage(citel.chat,{text :  `(\\_/)\n( •.•)\n/>🤍` })
-      for (let i = 0; i < teddy.length; i++) {
-        await sleep(500);
-        await Void.sendMessage(citel.chat,{text:`(\\_/)\n( •.•)\n/>${teddy[i]}`,  edit: key })             
-      }
+}, async (Void, citel, text) => {
+    // Define the sleep function
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    
+    let teddy = ['❤️', '💕', '😻', '🧡', '💛', '💚', '💙', '💜', '🖤', '❣', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '♥️', '💌', '🙂', '🤗', '😌', '😉', '🤗', '😊', '🎊', '🎉', '🎁', '🎈','❤️'];
+    const { key } = await Void.sendMessage(citel.chat, { text: `(\\_/)\n( •.•)\n/>🤍` });
 
-})
-
-
+    for (let i = 0; i < teddy.length; i++) {
+        await sleep(500); // Wait for 500 milliseconds
+        await Void.sendMessage(citel.chat, { text: `(\\_/)\n( •.•)\n/>${teddy[i]}`, edit: key });
+    }
+});
