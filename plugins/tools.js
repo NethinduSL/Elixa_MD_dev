@@ -78,14 +78,14 @@ async (Void, citel) => {
     
     await sleep(1000);
 
-    const currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-    const currentTime = moment().format('HH:mm:ss');
-    const dayOfWeek = moment().format('dddd');
-    const daysToEndYear = moment().endOf('year').diff(moment(), 'days');
-    const timeZone = moment().zoneName();
+    const currentDateTime = moment().tz('Asia/Colombo').format('YYYY-MM-DD HH:mm:ss');
+    const currentTime = moment().tz('Asia/Colombo').format('HH:mm:ss');
+    const dayOfWeek = moment().tz('Asia/Colombo').format('dddd');
+    const daysToEndYear = moment().tz('Asia/Colombo').endOf('year').diff(moment().tz('Asia/Colombo'), 'days');
+    const timeZone = moment().tz('Asia/Colombo').format('z');
 
-    const endOfDay = moment().endOf('day');
-    const timeRemainingEndOfDay = moment.duration(endOfDay.diff(moment())).humanize();
+    const endOfDay = moment().tz('Asia/Colombo').endOf('day');
+    const timeRemainingEndOfDay = moment.duration(endOfDay.diff(moment().tz('Asia/Colombo'))).humanize();
 
     const responseMessage = `
 📍 *Current Date and Time (Numbers):* ${currentDateTime}
@@ -96,7 +96,6 @@ async (Void, citel) => {
 🕰️ *Time Zone:* ${timeZone}
 
 > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
-
 `;
 
     const pg = await Void.sendMessage(citel.chat, { text: responseMessage, edit: key });
