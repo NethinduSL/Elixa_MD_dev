@@ -53,36 +53,42 @@ cmd({
     react: "💖",
     filename: __filename,
 }, async (conn, mek, m, {
-        from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, 
-        botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, 
-        participants, groupAdmins, isBotAdmins, isAdmins, reply
+    from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber,
+    botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName,
+    participants, groupAdmins, isBotAdmins, isAdmins, reply
 }) => {
     try {
-            const text = args.join(" ").trim();
+        // Join arguments into a single term to search
+        const searchTerm = args.join(" ").trim();
 
-        
+        if (!searchTerm) {
+            return reply("Please provide a word to define.");
+        }
 
-        const response = await axios.get(`http://api.urbandictionary.com/v0/define?term=${text}`);
+        // Fetch data from Urban Dictionary API
+        const response = await axios.get(`http://api.urbandictionary.com/v0/define?term=${encodeURIComponent(searchTerm)}`);
         const data = response.data;
 
-        if (data.list && data.list.length > 1) {
-            const entry = data.list[1]; // Use the first definition from the list
-            const text = `
-Word: ${entry.word}
-Definition: ${entry.definition.replace(/\[/g, "").replace(/\]/g, "")}
-Example: ${entry.example.replace(/\[/g, "").replace(/\]/g, "")}
+        // Check if there are definitions available
+        if (data.list && data.list.length > 0) {
+            const entry = data.list[0]; // Use the first definition
+            const definitionText = `
+*Word*: ${entry.word}
+*Definition*: ${entry.definition.replace(/\[/g, "").replace(/\]/g, "")}
+*Example*: ${entry.example.replace(/\[/g, "").replace(/\]/g, "")}
 
 > 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺
             `;
-            return citel.reply(text.trim());
+            return reply(definitionText.trim());
         } else {
-            return citel.reply(`No definition found for "${q}".`);
+            return reply(`No definition found for "${searchTerm}".`);
         }
     } catch (error) {
-        console.error("An error occurred:", error);
-        return citel.reply("An error occurred while fetching the definition. Please try again later.");
+        console.error("An error occurred:", error.message);
+        return reply("An error occurred while fetching the definition. Please try again later.");
     }
 });
+
 
 
 cmd({
