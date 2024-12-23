@@ -65,8 +65,8 @@ cmd({
         const response = await axios.get(`http://api.urbandictionary.com/v0/define?term=${text}`);
         const data = response.data;
 
-        if (data.list && data.list.length > 0) {
-            const entry = data.list[0]; // Use the first definition from the list
+        if (data.list && data.list.length > 1) {
+            const entry = data.list[1]; // Use the first definition from the list
             const text = `
 Word: ${entry.word}
 Definition: ${entry.definition.replace(/\[/g, "").replace(/\]/g, "")}
