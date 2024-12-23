@@ -52,7 +52,7 @@ cmd({
 
             // Send audio
             await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-            return conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mp3", fileName: `${data.title}.mp3` }, { quoted: mek });
+            return conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mp3", fileName: `${data.title}.mp3`,caption: "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗" }, { quoted: mek });
         } catch (err) {
             console.warn("Primary method failed:", err.message);
             if (!videoUrl) throw new Error("No video URL found for fallback");
@@ -80,7 +80,7 @@ cmd({
                 document: { url: download_url },
                 mimetype: "audio/mpeg",
                 fileName: `${title}.mp3`,
-                caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
+                caption: "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
             }, { quoted: mek });
 
         } catch (fallbackError) {
@@ -134,17 +134,45 @@ async (conn, mek, m, {
         await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4" }, { quoted: mek });
         await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: data.title + ".mp4", caption: "®𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗" }, { quoted: mek });
 
-    } catch (e) {
-        console.log(e);
-        reply(`If this is not work use video2\nමේක වැඩ නැත්නම් video2 වැඩ ${e}`);
+        } catch (err) {
+            console.warn("Primary method failed:", err.message);
+            if (!videoUrl) throw new Error("No video URL found for fallback");
+        }
+
+        // Fallback: Alternative API only if the first fails
+        try {
+            const apiUrl = `https://api.giftedtech.my.id/api/download/ytmp4?apikey=gifted&url=${videoUrl}`;
+            const response = await axios.get(apiUrl);
+            const { result } = response.data;
+
+            if (!result || !result.download_url) throw new Error("No results from API");
+
+            const { download_url, title } = result;
+
+            // Send audio as a playable file
+            await conn.sendMessage(from, {
+                audio: { url: download_url },
+                mimetype: "video/mpeg",
+                fileName: `${title}.mp4`
+            }, { quoted: mek });
+
+            // Send audio as a downloadable document
+            return conn.sendMessage(from, {
+                document: { url: download_url },
+                mimetype: "video/mpeg",
+                fileName: `${title}.mp4`,
+                caption: "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
+            }, { quoted: mek });
+
+        } catch (fallbackError) {
+            console.error("Fallback method failed:", fallbackError.message);
+            return reply(`Error: Both methods failed. Please try again later 🙃`);
+        }
+    } catch (finalError) {
+        console.error("Unexpected error:", finalError.message);
+        reply(`Error: ${finalError.message || "Something went wrong 🙃"}`);
     }
 });
-
-
-
-
-
-
 
 
 
