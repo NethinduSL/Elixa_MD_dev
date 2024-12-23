@@ -65,7 +65,7 @@ cmd({
             const response = await axios.get(apiUrl);
             const { result } = response.data;
 
-            if (!result || !result.download_url) throw new Error("No results from API");
+            
 
             const { download_url, title } = result;
 
