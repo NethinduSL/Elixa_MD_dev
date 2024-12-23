@@ -5,7 +5,7 @@ const fg = require('api-dylux');
 const yts = require('yt-search');
 const axios = require('axios');
 const { fetchJson } = require('../lib/functions');
-
+const { getBuffer } = require('../lib/functions');
 const { Buffer } = require('buffer');
 
 cmd({
