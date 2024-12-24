@@ -292,7 +292,7 @@ cmd({
         // Send the screenshot image
         await conn.sendMessage(
             from, 
-            { image: buffer, caption: `Here is your screenshot for: ${text}\n\n> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮-𝗠𝗗` }, 
+            { image: buffer, caption: `Here is your screenshot for: ${text}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺` }, 
             { quoted: mek }
         );
     } catch (e) {
@@ -340,7 +340,7 @@ cmd({
                 document: pdfBuffer.data, 
                 mimetype: 'application/pdf', 
                 fileName, 
-                caption: `PDF generated for: ${text}\nFile Name: ${fileName}\nSize: ${size_pretty}` 
+                caption: `PDF generated for: ${text}\nFile Name: ${fileName}\nSize: ${size_pretty}\.n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺` 
             }, 
             { quoted: mek }
         );
