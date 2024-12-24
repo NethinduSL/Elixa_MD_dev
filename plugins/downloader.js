@@ -57,7 +57,7 @@ cmd({
 
         try {
             
-     const response = await axios.get(`https://bk9.fun/download/ytmp3?url=${videoUrl}`);
+/*     const response = await axios.get(`https://bk9.fun/download/ytmp3?url=${videoUrl}`);
 const { result } = response.data;
 
 if (!result || !result.BK9 || !result.BK9.downloadUrl || result.BK9.downloadUrl.length < 3) {
@@ -79,11 +79,11 @@ await conn.sendMessage(from, {
     caption: "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗🔥"
 }, { quoted: mek });
 
-
+*/
             
             
             
-    /*     
+        
     
     const apiUrl = `https://api.giftedtech.my.id/api/download/ytmp3?apikey=gifted&url=${videoUrl}`;
             const response = await axios.get(apiUrl);
@@ -108,7 +108,7 @@ await conn.sendMessage(from, {
                 fileName: `${title}.mp3`,
                 caption: "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
             }, { quoted: mek });
-*/
+
 
 
         } catch (fallbackError) {
