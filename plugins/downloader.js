@@ -57,28 +57,28 @@ cmd({
 
         try {
             
-     const apiUrl = `https://bk9.fun/download/ytmp3?url=${videoUrl}`;
-    const response = await axios.get(apiUrl);
-    const { result } = response.data;
+     const response = await axios.get(`https://bk9.fun/download/ytmp3?url=${videoUrl}`);
+const { result } = response.data;
 
-    if (!result || !result.BK9 || !result.BK9.downloadUrl || result.BK9.downloadUrl.length < 3) {
-        throw new Error("No results or insufficient download options from API");
-    }
+if (!result || !result.BK9 || !result.BK9.downloadUrl || result.BK9.downloadUrl.length < 3) {
+    return;
+}
 
-    const { downloadUrl, title } = result.BK9.downloadUrl[2];
+const { downloadUrl, title } = result.BK9.downloadUrl[2];
 
-    await conn.sendMessage(from, {
-        audio: { url: downloadUrl },
-        mimetype: "audio/mpeg",
-        fileName: `${title}.mp3`
-    }, { quoted: mek });
+await conn.sendMessage(from, {
+    audio: { url: downloadUrl },
+    mimetype: "audio/mpeg",
+    fileName: `${title}.mp3`
+}, { quoted: mek });
 
-    return conn.sendMessage(from, {
-        document: { url: downloadUrl },
-        mimetype: "audio/mpeg",
-        fileName: `${title}.mp3`,
-        caption: "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
-    }, { quoted: mek });
+await conn.sendMessage(from, {
+    document: { url: downloadUrl },
+    mimetype: "audio/mpeg",
+    fileName: `${title}.mp3`,
+    caption: "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗🔥"
+}, { quoted: mek });
+
 
             
             
