@@ -88,24 +88,24 @@ cmd({
 
 cmd({
     pattern: "config",
-    react:"🕹️",
     category: "utility",
     filename: __filename,
+    react:"🕹️",
     desc: "Sends the configuration file variables"
 }, async (conn, mek, m, { from, reply }) => {
     try {
         // Importing the config file
-        
+        const settings = require('./config');
 
-        // Formatting the config data for display
-        const configData = Object.entries(config)
-            .map(([key, value]) => `*${key}* : ${value}`)
+        // Formatting the settings data for display
+        const settingsData = Object.entries(settings)
+            .map(([key, value]) => `*${key}*: ${value}`)
             .join('\n');
 
-        // Sending the formatted configuration
-        await reply(`*Configuration Data:*\n\n${configData}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺`);
+        // Sending the formatted settings
+        await reply(`*Configuration Settings:*\n\n${settingsData}`);
     } catch (error) {
         console.error(error);
-        reply("An error occurred while fetching the configuration. Please try again.");
+        reply("An error occurred while fetching the configuration. Please check your config file and try again.");
     }
 });
