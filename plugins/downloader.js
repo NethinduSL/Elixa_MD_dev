@@ -232,26 +232,37 @@ const downloadMessage = `ᴅᴏᴡɴʟᴏᴀᴅ ꜱᴘᴇᴇᴅ ɪꜱ ᴅᴇᴘ�
 cmd({
     pattern: "ss",
     category: "download",
-    react: "🔥",
     filename: __filename,
-    desc: "Sends screenshot of web site"
-},
-async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    desc: "Sends a screenshot of a website"
+}, async (conn, mek, m, { from, quoted, body, args, reply }) => {
     try {
         if (args.length === 0) {
-            return reply("Please provide the text to generate the QR code.");
+            return reply("Please provide a valid link to generate a screenshot.");
         }
 
-        const text = args.join(" ");
-        const qrcode = `https://api.microlink.io/?url=https%3A%2F%2F${encodeURIComponent(text)}&screenshot=true&embed=screenshot.url`;
-        const buffer = await getBuffer(qrcode);
-//https://api.microlink.io/?url=https%3A%2F%2FWww.google.com&screenshot=true&embed=screenshot.url
+        // Clean the provided URL
+        let text = args.join(" ").trim();
+        text = text.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\s+/g, '');
 
-        
-        await conn.sendMessage(from, { image: buffer, caption: `Here is your code img for: ${text}\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺` }, { quoted: mek });
+        // Ensure the URL is valid after cleaning
+        if (!text.includes(".")) {
+            return reply("The provided text doesn't look like a valid link. Please try again.");
+        }
+
+        // Construct the API URL for screenshot
+        const apiUrl = `https://api.microlink.io/?url=https%3A%2F%2F${encodeURIComponent(text)}&screenshot=true&embed=screenshot.url`;
+
+        // Fetch the screenshot
+        const buffer = await getBuffer(apiUrl);
+
+        // Send the screenshot image
+        await conn.sendMessage(
+            from, 
+            { image: buffer, caption: `Here is your screenshot for: ${text}\n\n> 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 𝗯𝘆 𝗘𝗹𝗶𝘅𝗮-𝗠𝗗` }, 
+            { quoted: mek }
+        );
     } catch (e) {
         console.error(e);
-        mek.reply("An error occurred while generating the QR code. Please try again.");
+        reply("An error occurred while generating the screenshot. Please try again.");
     }
 });
-
