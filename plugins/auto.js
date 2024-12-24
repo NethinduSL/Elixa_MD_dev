@@ -90,7 +90,7 @@ async (conn, mek, m, { from, body, isOwner }) => {
     if (fs.existsSync(filePath)) {
       const data = JSON.parse(fs.readFileSync(filePath, 'utf8')); // Parse array from file
       for (const text of data) {
-        if (body.toLowerCase().includes(text.toLowerCase()) && config.AUTO_REPLY === 'true') {
+        if (body.toLowerCase().includes(text.toLowerCase()) && config.AUTO_BADWORD === 'true') {
           // Send a warning message
           await conn.sendMessage(from, { text: "🚫 word detected!\nකුණුහරුප තහනම් \n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺" });
           // Delete the message
