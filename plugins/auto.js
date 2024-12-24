@@ -81,7 +81,7 @@ async (conn, mek, m, { from, body, isOwner }) => {
 
 //
 
-code-cmd({
+cmd({
   on: 'body'
 },
 async (conn, mek, m, { from, body, isOwner }) => {
