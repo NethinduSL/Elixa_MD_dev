@@ -56,15 +56,47 @@ cmd({
         }
 
         try {
-            const apiUrl = `https://api.giftedtech.my.id/api/download/ytmp3?apikey=gifted&url=${videoUrl}`;
+            
+     const apiUrl = `https://bk9.fun/download/ytmp3?url=${videoUrl}`;
+    const response = await axios.get(apiUrl);
+    const { result } = response.data;
+
+    if (!result || !result.BK9 || !result.BK9.downloadUrl || result.BK9.downloadUrl.length < 3) {
+        throw new Error("No results or insufficient download options from API");
+    }
+
+    const { downloadUrl, title } = result.BK9.downloadUrl[2];
+
+    await conn.sendMessage(from, {
+        audio: { url: downloadUrl },
+        mimetype: "audio/mpeg",
+        fileName: `${title}.mp3`
+    }, { quoted: mek });
+
+    return conn.sendMessage(from, {
+        document: { url: downloadUrl },
+        mimetype: "audio/mpeg",
+        fileName: `${title}.mp3`,
+        caption: "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
+    }, { quoted: mek });
+
+            
+            
+            
+    /*     
+    
+    const apiUrl = `https://api.giftedtech.my.id/api/download/ytmp3?apikey=gifted&url=${videoUrl}`;
             const response = await axios.get(apiUrl);
             const { result } = response.data;
+    
+    
+    if (!result || !result.download_url) throw new Error("No results from API");
 
-            if (!result || !result.download_url) throw new Error("No results from API");
+//            const { download_url, title } = result;
 
             const { download_url, title } = result;
 
-            await conn.sendMessage(from, {
+           await conn.sendMessage(from, {
                 audio: { url: download_url },
                 mimetype: "audio/mpeg",
                 fileName: `${title}.mp3`
@@ -76,6 +108,8 @@ cmd({
                 fileName: `${title}.mp3`,
                 caption: "𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗"
             }, { quoted: mek });
+*/
+
 
         } catch (fallbackError) {
             console.error("Fallback method failed:", fallbackError.message);
