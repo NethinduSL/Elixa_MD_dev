@@ -77,7 +77,7 @@ cmd({
         const jid = m.chat;
 
         // Send the JID as a message
-        await conn.sendMessage(m.chat, { text: '📍 *Chat JID: ' + jid + '*'\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺ });
+        await conn.sendMessage(m.chat, { text: '📍 *Chat JID: ' + jid + '*\n\n> 𝗚𝗲𝟆𝗮𝗿𝗮𝐭𝗲𝙙 𝝗𝞤 𝗘ꟾ𝖎✘𝗮 ‐𝝡𝗗༺' });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
