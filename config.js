@@ -17,6 +17,7 @@ module.exports = {
     AUTO_REPLY: process.env.AUTO_REPLY || "true",
     AUTO_STICKER: process.env.AUTO_STICKER || "true",
     AUTO_VOICE: process.env.AUTO_VOICE || "true",
+    AUTO_BADWORD: process.env.AUTO_BADWORD || "true",
 //╰────────────────────────────────────────────────╯//
 
     ALIVE_MODE: process.env.ALIVE_MODE || "elixa", // modes are elixa and hack
