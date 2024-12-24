@@ -267,6 +267,7 @@ cmd({
     pattern: "ss",
     category: "download",
     filename: __filename,
+    react: "🔥",
     desc: "Sends a screenshot of a website"
 }, async (conn, mek, m, { from, quoted, body, args, reply }) => {
     try {
@@ -306,6 +307,7 @@ cmd({
     pattern: "sspdf",
     category: "download",
     filename: __filename,
+    react: "🔥",
     desc: "Sends a PDF of a website"
 }, async (conn, mek, m, { from, quoted, body, args, reply }) => {
     try {
