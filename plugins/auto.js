@@ -81,6 +81,30 @@ async (conn, mek, m, { from, body, isOwner }) => {
 
 //
 
+code-cmd({
+  on: 'body'
+},
+async (conn, mek, m, { from, body, isOwner }) => {
+  try {
+    const filePath = path.join(__dirname, '../Elixa/badword.json');
+    if (fs.existsSync(filePath)) {
+      const data = JSON.parse(fs.readFileSync(filePath, 'utf8')); // Parse array from file
+      for (const text of data) {
+        if (body.toLowerCase().includes(text.toLowerCase()) && config.AUTO_REPLY === 'true') {
+          // Send a warning message
+          await conn.sendMessage(from, { text: "Bad word detected!" }, { quoted: mek });
+          // Delete the message
+          await conn.sendMessage(from, { delete: mek.key });
+          break; // Exit loop once a match is found
+        }
+      }
+    } else {
+      console.error(`Auto Reply file not found: ${filePath}`);
+    }
+  } catch (error) {
+    console.error(`Error in Auto Reply: ${error.message}`);
+  }
+});
 
 
 
