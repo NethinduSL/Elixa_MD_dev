@@ -92,7 +92,7 @@ async (conn, mek, m, { from, body, isOwner }) => {
       for (const text of data) {
         if (body.toLowerCase().includes(text.toLowerCase()) && config.AUTO_REPLY === 'true') {
           // Send a warning message
-          await conn.sendMessage(from, { text: "Bad word detected!" }, { quoted: mek });
+          await conn.sendMessage(from, { text: "🚫 word detected!" }, { quoted: mek });
           // Delete the message
           await conn.sendMessage(from, { delete: mek.key });
           break; // Exit loop once a match is found
