@@ -95,7 +95,7 @@ cmd({
 }, async (conn, mek, m, { from, reply }) => {
     try {
         // Importing the config file
-        const settings = require('./config');
+        const settings = require('../config');
 
         // Formatting the settings data for display
         const settingsData = Object.entries(settings)
