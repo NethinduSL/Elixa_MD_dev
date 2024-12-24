@@ -300,3 +300,52 @@ cmd({
         reply("An error occurred while generating the screenshot. Please try again.");
     }
 });
+
+
+cmd({
+    pattern: "sspdf",
+    category: "download",
+    filename: __filename,
+    desc: "Sends a PDF of a website"
+}, async (conn, mek, m, { from, quoted, body, args, reply }) => {
+    try {
+        if (args.length === 0) {
+            return reply("Please provide a valid link to generate a PDF.");
+        }
+
+        let text = args.join(" ").trim();
+        text = text.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\s+/g, '');
+
+        if (!text.includes(".")) {
+            return reply("The provided text doesn't look like a valid link. Please try again.");
+        }
+
+        const apiUrl = `https://api.microlink.io/?url=https%3A%2F%2F${encodeURIComponent(text)}&pdf=true&embed=pdf`;
+
+        const response = await axios.get(apiUrl);
+        const { status, url, size_pretty, type } = response.data;
+
+        if (status !== "success" || type !== "pdf") {
+            return reply("Failed to generate the PDF. Please try again.");
+        }
+
+        const pdfBuffer = await axios.get(url, { responseType: "arraybuffer" });
+
+        const websiteName = text.split('.')[0];
+        const fileName = `${text}_web.pdf`;
+
+        await conn.sendMessage(
+            from, 
+            { 
+                document: pdfBuffer.data, 
+                mimetype: 'application/pdf', 
+                fileName, 
+                caption: `PDF generated for: ${text}\nFile Name: ${fileName}\nSize: ${size_pretty}` 
+            }, 
+            { quoted: mek }
+        );
+    } catch (e) {
+        console.error(e);
+        reply("An error occurred while generating the PDF. Please try again.");
+    }
+});
